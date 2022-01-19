@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import "./WeeklyTable";
 
 import "./Home.css";
 import logo from "./logo.svg";
+import WeeklyTable from "./WeeklyTable";
+import UsersData from "../Data/UsersData.json";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
@@ -37,6 +40,8 @@ export function Home() {
 				</h1>
 				<Link to="/about/this/site">About</Link>
 			</div>
+			<WeeklyTable />
+			
 		</main>
 	);
 }
