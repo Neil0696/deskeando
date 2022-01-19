@@ -37,11 +37,6 @@ export function Home() {
 				</h1>
 				<Link to="/about/this/site">About</Link>
 			</div>
-<<<<<<< Updated upstream
-=======
-			<WeeklyTable result={UsersData}/>
-			
->>>>>>> Stashed changes
 		</main>
 	);
 }
