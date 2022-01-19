@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "desk_user_id": 1,
+        "booking_date": "2022-01-17T00:00:00.000Z",
+        "username": "Maha"
+    },
+    {
+        "id": 2,
+        "desk_user_id": 2,
+        "booking_date": "2022-01-19T00:00:00.000Z",
+        "username": "Sam"
+    },
+    {
+        "id": 1,
+        "desk_user_id": 1,
+        "booking_date": "2022-01-19T00:00:00.000Z",
+        "username": "Maha"
+    },
+    {
+        "id": 3,
+        "desk_user_id": 3,
+        "booking_date": "2022-01-19T00:00:00.000Z",
+        "username": "Pablo"
+    },
+    {
+        "id": 3,
+        "desk_user_id": 3,
+        "booking_date": "2022-01-20T00:00:00.000Z",
+        "username": "Pablo"
+    },
+    {
+        "id": 1,
+        "desk_user_id": 1,
+        "booking_date": "2022-01-20T00:00:00.000Z",
+        "username": "Maha"
+    },
+    {
+        "id": 1,
+        "desk_user_id": 1,
+        "booking_date": "2022-01-21T00:00:00.000Z",
+        "username": "Maha"
+    }
+]

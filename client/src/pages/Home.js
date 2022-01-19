@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import UsersData from "../Data/UsersData";
+import WeeklyTable from "./WeeklyTable";
+
 import "./Home.css";
 import logo from "./logo.svg";
 
@@ -37,11 +40,7 @@ export function Home() {
 				</h1>
 				<Link to="/about/this/site">About</Link>
 			</div>
-<<<<<<< Updated upstream
-=======
 			<WeeklyTable result={UsersData}/>
-			
->>>>>>> Stashed changes
 		</main>
 	);
 }
