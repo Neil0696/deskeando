@@ -4,7 +4,7 @@ import db from "./db";
 const router = new Router();
 
 router.get("/", (req, res) => {
-	res.json({ message: "Hello, world!" });
+	res.json({ message: "Deskeando" });
 });
 
 router.get("/bookings", (req, res) => {

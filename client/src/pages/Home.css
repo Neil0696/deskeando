@@ -1,11 +1,15 @@
 .logo {
-	width: 100px;
+	 width: 150px;
+	 display: block;
+  	 margin-left: auto;
+  	 margin-right: auto;
+	 padding-bottom: 60px;
+	 border-radius: 50%;
 }
 
 .message {
-	color: blue;
+	color: rgb(59, 41, 21);
+	text-align: center;
 }
 
-.message:hover {
-	background-color: yellow;
-}
+body {background-color: rgb(218, 218, 218);}

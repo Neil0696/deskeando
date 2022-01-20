@@ -3,9 +3,9 @@ import { Link } from "react-router-dom";
 import "./WeeklyTable";
 
 import "./Home.css";
-import logo from "./logo.svg";
+import logo from "../assets/Logo.png";
 import WeeklyTable from "./WeeklyTable";
-import UsersData from "../Data/UsersData.json";
+import UsersData from "../Data/bookings.json";
 
 export function Home() {
 	const [message, setMessage] = useState("Loading...");
@@ -35,13 +35,13 @@ export function Home() {
 					src={logo}
 					alt="Just the React logo"
 				/>
-				<h1 className="message" data-qa="message">
+				{/* <h1 className="message" data-qa="message">
 					{message}
-				</h1>
-				<Link to="/about/this/site">About</Link>
+				</h1> */}
+				{/* <Link to="/about/this/site">About</Link> */}
 			</div>
 			<WeeklyTable />
-			
+
 		</main>
 	);
 }
