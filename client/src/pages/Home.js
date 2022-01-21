@@ -40,7 +40,7 @@ export function Home() {
 				</h1>
 				<Link to="/about/this/site">About</Link>
 			</div>
-			<WeeklyTable result={UsersData}/>
+			<WeeklyTable bookings={UsersData}/>
   </main>
 	);
 }
