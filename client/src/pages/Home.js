@@ -1,14 +1,22 @@
 import { Link } from "react-router-dom";
-
 import UsersData from "../Data/UsersData";
 import WeeklyTable from "./WeeklyTable";
-
 import "./Home.css";
 import logo from "./logo.svg";
 
 const ROWS_COUNT = 3;
 
 export function Home() {
+
+	useEffect(() => {
+		fetch("/api/bookings")
+			.then((response) => response.json())
+			.then((data) => {
+				// console.log(data, "DATA");
+				setResult(data);
+			})
+			.catch((err) => console.log(err));
+	}, []);
 
 	return (
 		<main role="main">
