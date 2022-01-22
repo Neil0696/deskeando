@@ -10,7 +10,7 @@ const App = () => (
 			<Home />
 		</Route>
 		<Route path="/booking">
-			<BookingScreen />
+			<BookingScreen bookingDate="2022-01-18T00:00:00.000Z"/>
 		</Route>
 		<Route path="/about/this/site">
 			<About />
