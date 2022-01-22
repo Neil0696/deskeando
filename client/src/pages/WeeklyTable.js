@@ -39,8 +39,8 @@ const WeeklyTable = ({ bookings, rowsCount }) => {
 				<tbody>
 					{bookingsByRow.map((row, i) => (
 						<tr key={i}>
-							{row.map((e, index) => (
-								<td key={index}>{e?.name}</td>
+							{row.map((booking, index) => (
+								<td key={index}>{booking?.name}</td>
 							))}
 						</tr>
 					))}
