@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import UsersData from "../Data/UsersData";
+import React, { useState, useEffect } from "react";
 import WeeklyTable from "./WeeklyTable";
 import "./Home.css";
 import logo from "./logo.svg";
@@ -8,12 +8,14 @@ const ROWS_COUNT = 3;
 
 export function Home() {
 
+	const [bookings, setBookings] = useState([]);
+
 	useEffect(() => {
 		fetch("/api/bookings")
 			.then((response) => response.json())
 			.then((data) => {
 				// console.log(data, "DATA");
-				setResult(data);
+				setBookings(data);
 			})
 			.catch((err) => console.log(err));
 	}, []);
@@ -30,7 +32,7 @@ export function Home() {
 
 				<Link to="/about/this/site">About</Link>
 			</div>
-			<WeeklyTable bookings={UsersData} rowsCount={ROWS_COUNT} />
+			<WeeklyTable bookings={bookings} rowsCount={ROWS_COUNT} />
   </main>
 	);
 }
