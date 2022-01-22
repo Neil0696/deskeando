@@ -10,8 +10,8 @@ const BookingScreen = () => {
         event.preventDefault();
 	}
 
-    const handleChange = (e) => {
-        setBookingDate(e.target.value)
+    const handleChange = (event) => {
+        setBookingDate(event.target.value)
     }
 
     return (
@@ -21,7 +21,7 @@ const BookingScreen = () => {
 					<input
 						type="text"
 						value={name}
-						onChange={(e) => setName(e.target.value)}
+						onChange={(event) => setName(event.target.value)}
 					/>
 				</lable>
 				<br />
@@ -29,9 +29,6 @@ const BookingScreen = () => {
 					Date:
 					<select type="date" value={bookingDate} onChange={handleChange}>
 						<option value="11/01/2022">11/01/2022</option>
-						<option value="12/02/2022">12/02/2022</option>
-						<option value="13/03/2022">13/03/2022</option>
-						<option value="14/04/2022">14/04/2022</option>
 					</select>
 				</lable>
 				<br />
@@ -40,7 +37,7 @@ const BookingScreen = () => {
 					<input type="checkbox" />
 				</lable>
 				<br />
-				<input type="submit" checked={true} value="Create Booking" />
+				<input type="submit" value="Create Booking" />
 			</form>
 		);
 }
