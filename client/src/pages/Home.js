@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import WeeklyTable from "./WeeklyTable";
 import "./Home.css";
-import logo from "./logo.svg";
+import logo from "../assets/logo5.png";
 
 const ROWS_COUNT = 3;
 
@@ -27,10 +27,10 @@ export function Home() {
 					className="logo"
 					data-qa="logo"
 					src={logo}
-					alt="Just the React logo"
+					alt="Just the Deskeando logo"
 				/>
 
-				<Link to="/about/this/site">About</Link>
+				{/* <Link to="/about/this/site">About</Link> */}
 			</div>
 			<WeeklyTable bookings={bookings} rowsCount={ROWS_COUNT} />
   </main>

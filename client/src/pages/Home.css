@@ -1,11 +1,15 @@
+* {
+  font-family: sans-serif;
+}
+
+
 .logo {
-	width: 100px;
+	width: 300px;
+	display: block;
+  	/* margin-left: auto; */
+  	margin-right: auto; 
+	/* padding-bottom: 50px; */
+	border-radius: 15px;
 }
 
-.message {
-	color: blue;
-}
 
-.message:hover {
-	background-color: yellow;
-}
