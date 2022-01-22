@@ -1,11 +1,14 @@
 import React from "react";
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
+
 
 const BookingScreen = ({ bookingDate }) => {
-    const [name, setName] = useState("");
+	const [name, setName] = useState("");
+	
+	let history = useHistory();
 
     const handleSubmit = (event) => {
-		alert("Your booking date is: " + bookingDate);
 		event.preventDefault();
 		
 		fetch("/api/bookings", {
@@ -16,8 +19,13 @@ const BookingScreen = ({ bookingDate }) => {
 			body: JSON.stringify({
 			"name": name, "date": bookingDate 
 			}),
-		});
+		})
+		.then(() => {
+			history.push("/")
+		})
 	};
+
+
 
     return (
 			<form onSubmit={handleSubmit}>
