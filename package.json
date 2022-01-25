@@ -4,6 +4,7 @@
 	"description": "Starter kit for full-stack JavaScript projects",
 	"private": true,
 	"scripts": {
+		"recreate-db": "node ./server/database_operations.js",
 		"prebuild": "npm run cleanup",
 		"build": "npm run build:server && npm run build:client",
 		"build:client": "webpack --config client/webpack/prod.config.js",

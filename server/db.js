@@ -1,12 +1,9 @@
 import { Pool } from "pg";
+import { config } from "./config.js";
 
-const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
+//const dbUrl = process.env.DATABASE_URL || "postgres://localhost:5432/cyf";
 
-const pool = new Pool({
-	connectionString: dbUrl,
-	connectionTimeoutMillis: 5000,
-	ssl: dbUrl.includes("localhost") ? false : { rejectUnauthorized: false },
-});
+const pool = new Pool(config);
 
 export const connectDb = async () => {
 	let client;

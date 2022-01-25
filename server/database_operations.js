@@ -1,5 +1,5 @@
-const { Pool } = require("pg");
-const config = require("../config");
+const { Pool } = require("db");
+const config = require("./config");
 const fs = require("fs");
 
 const createSchema = fs
