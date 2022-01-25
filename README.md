@@ -33,6 +33,7 @@ You should now make sure all of the project team are [collaborators] on the repo
 
 ## Scripts
 
+
 Various scripts are provided in the package file, but many are helpers for other scripts; here are the ones you'll
 commonly use:
 
@@ -41,6 +42,12 @@ commonly use:
 - `lint`: runs ESLint and Prettier against all the code in the project.
 - `serve`: builds and starts the app in production mode locally.
 
+## Database staging
+
+run `psql -d cyf -f server\create_tables.sql` 
+  use `/` on MacOS
+  use `\` on windowsOS
+  
 ### Debugging
 
 While running the dev mode using `npm run dev`, you can attach the Node debugger to the server process via port 9229.
