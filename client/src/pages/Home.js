@@ -7,7 +7,6 @@ import logo from "../assets/logo5.png";
 const ROWS_COUNT = 3;
 
 export function Home() {
-
 	const [bookings, setBookings] = useState([]);
 
 	useEffect(() => {
@@ -33,7 +32,7 @@ export function Home() {
 				{/* <Link to="/about/this/site">About</Link> */}
 			</div>
 			<WeeklyTable bookings={bookings} rowsCount={ROWS_COUNT} />
-  </main>
+		</main>
 	);
 }
 
