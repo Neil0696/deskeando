@@ -71,7 +71,9 @@
 		"express": "^4.17.1",
 		"helmet": "^4.6.0",
 		"morgan": "^1.10.0",
-		"pg": "^8.7.1"
+		"pg": "^8.7.1",
+		"semantic-ui-css": "^2.4.1",
+		"semantic-ui-react": "^2.0.4"
 	},
 	"engines": {
 		"node": "^12 || ^14",
