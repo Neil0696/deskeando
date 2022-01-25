@@ -25,11 +25,11 @@ router.get("/bookings", async (req, res) => {
 router.post("/bookings", async function (req, res) {
 	const userName = req.body.name;
 	const deskId = req.body.deskId;
-	const deskName = req.body.desk;
+	//const deskName = req.body.desk;
 	const bookingDate = req.body.date;
 
 	const insertQuery =
-		"INSERT INTO booking (desk_user_id, desk_id, desk_table_name, booking_date) VALUES ($1, $2, $3, $4)";
+		"INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES ($1, $2, $3)";
 	try {
 		const userResult = await db.query(
 			"SELECT id from desk_user WHERE username=$1",
@@ -43,8 +43,8 @@ router.post("/bookings", async function (req, res) {
 			return res.status(400).send(`User with name ${userName} does not exist`);
 		}
 		const userId = userResult.rows[0].id;
-		// const tableId = tableResult.rows[0].id;
-		const bookingResult = await db.query(insertQuery, [userId, deskId, deskName, bookingDate]);
+		//const tableId = tableResult.rows[0].id;
+		const bookingResult = await db.query(insertQuery, [userId, deskId, bookingDate]);
 		res.send("Booking created!");
 	} catch (e) {
 		console.error(e);
