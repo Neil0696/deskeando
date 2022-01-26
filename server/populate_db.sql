@@ -18,3 +18,6 @@ INSERT INTO booking (desk_user_id, booking_date) VALUES (3,'2022-01-19');
 INSERT INTO booking (desk_user_id, booking_date) VALUES (3,'2022-01-20');
 INSERT INTO booking (desk_user_id, booking_date) VALUES (1,'2022-01-20');
 INSERT INTO booking (desk_user_id, booking_date) VALUES (1,'2022-01-21');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (4,1,'2022-01-20');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-01-18');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (4,1,'2022-01-20');
