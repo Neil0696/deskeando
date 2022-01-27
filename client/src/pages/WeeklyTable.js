@@ -1,5 +1,6 @@
 import React from "react";
-import moment from 'moment';
+
+import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 
 import "./WeeklyTable.css";
@@ -35,10 +36,7 @@ const WeeklyTable = ({ bookings, rowsCount }) => {
 					<tr>
 						{week.map((date) => (
 							<th key={date}>
-								{moment(date).format("ddd MMM Do")}{" "}
-								<ModalBookingScreen
-									bookingDate={moment(date).format("ddd MMM Do")}
-								/>
+								{formatBookingDate(date)} <ModalBookingScreen bookingDate={date} />
 							</th>
 						))}
 					</tr>
