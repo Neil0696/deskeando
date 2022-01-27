@@ -1,4 +1,5 @@
 import React from "react";
+import moment from 'moment';
 import ModalBookingScreen from "./ModalBookingScreen";
 
 import "./WeeklyTable.css";
@@ -34,9 +35,9 @@ const WeeklyTable = ({ bookings, rowsCount }) => {
 					<tr>
 						{week.map((date) => (
 							<th key={date}>
-								{new Date(date).toLocaleDateString()}{" "}
+								{moment(date).format("ddd MMM Do")}{" "}
 								<ModalBookingScreen
-									bookingDate={new Date(date).toLocaleDateString()}
+									bookingDate={moment(date).format("ddd MMM Do")}
 								/>
 							</th>
 						))}
