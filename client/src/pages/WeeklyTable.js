@@ -1,4 +1,6 @@
 import React from "react";
+
+import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 
 import "./WeeklyTable.css";
@@ -34,10 +36,7 @@ const WeeklyTable = ({ bookings, rowsCount }) => {
 					<tr>
 						{week.map((date) => (
 							<th key={date}>
-								{new Date(date).toLocaleDateString()}{" "}
-								<ModalBookingScreen
-									bookingDate={new Date(date).toLocaleDateString()}
-								/>
+								{formatBookingDate(date)} <ModalBookingScreen bookingDate={date} />
 							</th>
 						))}
 					</tr>

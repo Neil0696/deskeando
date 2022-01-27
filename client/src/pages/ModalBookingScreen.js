@@ -1,5 +1,7 @@
 import React from "react";
+
 import { useState } from "react";
+import { formatBookingDate } from "../util";
 
 import {
 	Icon,
@@ -64,7 +66,11 @@ function ModalBookingScreen({ bookingDate }) {
 							</Form.Field>
 							<Divider inverted />
 							<label>Date: </label>
-							<input type="text" value={bookingDate} disabled />
+							<input
+								type="text"
+								value={formatBookingDate(bookingDate)}
+								disabled
+							/>
 						</Segment>
 						<Segment>
 							<Form.Field>
