@@ -12,11 +12,23 @@ import {
 	Button,
 	Header,
 	Modal,
+	Dropdown,
 } from "semantic-ui-react";
+
+const deskSelection = [
+	{ key: 1, text: "Desk 1", value: 1 },
+	{ key: 2, text: "Desk 2", value: 2 },
+	{ key: 3, text: "Desk 3", value: 3 },
+];
 
 function ModalBookingScreen({ bookingDate }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
+	const [checked, setChecked] = useState(false);
+
+	const handleCheck = () => {
+		setChecked(!checked);
+	};
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -66,16 +78,31 @@ function ModalBookingScreen({ bookingDate }) {
 							</Form.Field>
 							<Divider inverted />
 							<label>Date: </label>
+<<<<<<< Updated upstream
 							<input
 								type="text"
 								value={formatBookingDate(bookingDate)}
 								disabled
 							/>
+=======
+							<input type="text" value={bookingDate} />
+>>>>>>> Stashed changes
 						</Segment>
 						<Segment>
 							<Form.Field>
-								<Checkbox label="I don't care where I sit" defaultChecked />
+								<Checkbox
+									label="I don't care where I sit"
+									defaultChecked
+									onChange={handleCheck}
+								/>
 							</Form.Field>
+							{checked && (
+								<Dropdown
+									placeholder="Desk Selection"
+									options={deskSelection}
+									selection
+								/>
+							)}
 						</Segment>
 					</form>
 				</Modal.Description>
