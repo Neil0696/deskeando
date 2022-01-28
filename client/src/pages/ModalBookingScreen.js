@@ -14,7 +14,7 @@ import {
 	Modal,
 } from "semantic-ui-react";
 
-function ModalBookingScreen({ bookingDate }) {
+function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
 
@@ -34,6 +34,7 @@ function ModalBookingScreen({ bookingDate }) {
 			console.log(response.json());
 			if (response.status >= 200 && response.status <= 299) {
 				setOpen(false);
+				refreshBooking();
 			} else {
 				throw new Error(
 					`Encountered something unexpected: ${response.status} ${response.statusText}`
