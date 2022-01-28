@@ -8,6 +8,7 @@ const ROWS_COUNT = 3;
 
 export function Home() {
 	const [bookings, setBookings] = useState([]);
+	const [refreshKey, setRefreshKey] = useState(0);
 
 	useEffect(() => {
 		fetch("/api/bookings")
@@ -17,7 +18,11 @@ export function Home() {
 				setBookings(data);
 			})
 			.catch((err) => console.log(err));
-	}, []);
+	}, [refreshKey]);
+
+	const refreshBooking = () => {
+		setRefreshKey((oldKey) => oldKey + 1);
+	}
 
 	return (
 		<main role="main">
@@ -31,7 +36,7 @@ export function Home() {
 
 				{/* <Link to="/about/this/site">About</Link> */}
 			</div>
-			<WeeklyTable bookings={bookings} rowsCount={ROWS_COUNT} />
+			<WeeklyTable bookings={bookings} rowsCount={ROWS_COUNT} refreshBooking={refreshBooking} />
 		</main>
 	);
 }

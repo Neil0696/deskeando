@@ -12,7 +12,7 @@ import {
 	Button,
 	Header,
 	Modal,
-	Dropdown,
+	Message,
 } from "semantic-ui-react";
 
 const deskSelection = [
@@ -20,38 +20,50 @@ const deskSelection = [
 	{ key: 2, text: "Desk 2", value: 2 },
 	{ key: 3, text: "Desk 3", value: 3 },
 ];
+	
 
-function ModalBookingScreen({ bookingDate }) {
+
+function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
-	const [checked, setChecked] = useState(false);
+	const [bookingErr, setBookingErr] = useState(false);
+	const [nameErr, setNameErr] = useState(false);
+  const [checked, setChecked] = useState(false);
 
-	const handleCheck = () => {
-		setChecked(!checked);
-	};
-
+  const handleCheck = () => {
+		setChecked((previousChecked) => !previousChecked)
+  }
+  
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		fetch("/api/bookings", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				name: name,
-				date: bookingDate,
-			}),
-		}).then((response) => {
-			console.log(response.json());
-			if (response.status >= 200 && response.status <= 299) {
-				setOpen(false);
-			} else {
-				throw new Error(
-					`Encountered something unexpected: ${response.status} ${response.statusText}`
-				);
-			}
-		});
+		if (name === "") {
+			setNameErr(true);
+		} else {
+			fetch("/api/bookings", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: name,
+					date: bookingDate,
+				}),
+			})
+				.then((response) => {
+					response.json()
+					if (response.status >= 200 && response.status <= 299) {
+						setBookingErr(false);
+						setOpen(false);
+						refreshBooking();
+					} else {
+						throw new Error(
+							`Encountered something unexpected: ${response.status} ${response.statusText}`
+						);
+					}
+				})
+				.catch((err) => setBookingErr(true));
+		}
 	};
 
 	return (
@@ -66,27 +78,47 @@ function ModalBookingScreen({ bookingDate }) {
 			<Header as="h2" content="Book Your Desk" />
 			<Modal.Content>
 				<Modal.Description>
-					<form>
+					{bookingErr && (
+						<Message
+							error
+							header="An error occurred"
+							content="We couldn't book a desk for you"
+						/>
+					)}
+					<Form>
 						<Segment>
 							<Form.Field>
-								<label>Name: </label>
-								<input
+								<Form.Input
+									error={
+										nameErr && {
+											content: "Please enter your name",
+											pointing: "below",
+										}
+									}
 									placeholder="Name"
-									value={name}
-									onChange={(event) => setName(event.target.value)}
+									label="Name"
+									onChange={(event) => {
+										setName(event.target.value);
+										setNameErr(false);
+									}}
 								/>
 							</Form.Field>
 							<Divider inverted />
+
 							<label>Date: </label>
-<<<<<<< Updated upstream
+
 							<input
+
+							<Form.Input
+								placeholder="Date"
+								label="Date"
+
 								type="text"
 								value={formatBookingDate(bookingDate)}
 								disabled
 							/>
-=======
+
 							<input type="text" value={bookingDate} />
->>>>>>> Stashed changes
 						</Segment>
 						<Segment>
 							<Form.Field>
@@ -104,12 +136,18 @@ function ModalBookingScreen({ bookingDate }) {
 								/>
 							)}
 						</Segment>
-					</form>
+					</Form>
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>
 				<Button.Group>
-					<Button color="black" onClick={() => setOpen(false)}>
+					<Button
+						color="black"
+						onClick={() => {
+							setBookingErr(false);
+							setOpen(false);
+						}}
+					>
 						Cancel
 					</Button>
 					<Button.Or />
