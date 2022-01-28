@@ -27,7 +27,8 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [name, setName] = useState("");
 	const [bookingErr, setBookingErr] = useState(false);
 	const [nameErr, setNameErr] = useState(false);
-	const [checked, setChecked] = useState(false);
+	const [dontSelectDesk, setDontSelectDesk] = useState(true);
+	const [deskId, setDeskId] = useState(null);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -35,15 +36,20 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 		if (name === "") {
 			setNameErr(true);
 		} else {
+			let newBooking = {
+				name: name,
+				date: bookingDate,
+			};
+			if (!dontSelectDesk) {
+				newBooking.desk_id = deskId;
+			}
+
 			fetch("/api/bookings", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({
-					name: name,
-					date: bookingDate,
-				}),
+				body: JSON.stringify(newBooking),
 			})
 				.then((response) => {
 					response.json();
@@ -116,17 +122,17 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 							<Form.Field>
 								<Checkbox
 									label="I don't care where I sit"
-									defaultChecked
-									onChange={() =>
-										setChecked((previousChecked) => !previousChecked)
-									}
+									onChange={(e, data) => setDontSelectDesk(data.checked)}
+									checked={dontSelectDesk}
 								/>
 							</Form.Field>
-							{checked && (
+							{!dontSelectDesk && (
 								<Dropdown
 									placeholder="Desk Selection"
 									options={deskSelection}
 									selection
+									value={deskId}
+									onChange={(e, data) => setDeskId(data.value)}
 								/>
 							)}
 						</Segment>
