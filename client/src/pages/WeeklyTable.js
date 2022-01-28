@@ -49,7 +49,7 @@ const getBookingsByDesk = (bookings, week) => {
 	return bookingsByDesk;
 };
 
-const WeeklyTable = ({ bookings, rowsCount }) => {
+const WeeklyTable = ({ bookings, rowsCount, refreshBooking }) => {
 	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
 
 	const bookingsByDesk = getBookingsByDesk(bookings, week);
@@ -61,7 +61,7 @@ const WeeklyTable = ({ bookings, rowsCount }) => {
 						<th></th>
 						{week.map((date) => (
 							<th key={date}>
-								{formatBookingDate(date)} <ModalBookingScreen bookingDate={date} />
+								{formatBookingDate(date)} <ModalBookingScreen bookingDate={date} refreshBooking={refreshBooking} />
 							</th>
 						))}
 					</tr>
