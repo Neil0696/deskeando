@@ -13,6 +13,7 @@ import {
 	Header,
 	Modal,
 	Message,
+	Dropdown,
 } from "semantic-ui-react";
 
 const deskSelection = [
@@ -20,20 +21,14 @@ const deskSelection = [
 	{ key: 2, text: "Desk 2", value: 2 },
 	{ key: 3, text: "Desk 3", value: 3 },
 ];
-	
-
 
 function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
 	const [bookingErr, setBookingErr] = useState(false);
 	const [nameErr, setNameErr] = useState(false);
-  const [checked, setChecked] = useState(false);
+	const [checked, setChecked] = useState(false);
 
-  const handleCheck = () => {
-		setChecked((previousChecked) => !previousChecked)
-  }
-  
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
@@ -51,7 +46,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 				}),
 			})
 				.then((response) => {
-					response.json()
+					response.json();
 					if (response.status >= 200 && response.status <= 299) {
 						setBookingErr(false);
 						setOpen(false);
@@ -107,12 +102,9 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 
 							<label>Date: </label>
 
-							<input
-
 							<Form.Input
 								placeholder="Date"
 								label="Date"
-
 								type="text"
 								value={formatBookingDate(bookingDate)}
 								disabled
@@ -125,7 +117,9 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 								<Checkbox
 									label="I don't care where I sit"
 									defaultChecked
-									onChange={handleCheck}
+									onChange={() =>
+										setChecked((previousChecked) => !previousChecked)
+									}
 								/>
 							</Form.Field>
 							{checked && (
