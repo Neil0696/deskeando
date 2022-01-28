@@ -1,5 +1,7 @@
 import React from "react";
+
 import { useState } from "react";
+import { formatBookingDate } from "../util";
 
 import {
 	Icon,
@@ -13,7 +15,7 @@ import {
 	Message,
 } from "semantic-ui-react";
 
-function ModalBookingScreen({ bookingDate }) {
+function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
 	const [bookingErr, setBookingErr] = useState(false);
@@ -40,6 +42,7 @@ function ModalBookingScreen({ bookingDate }) {
 					if (response.status >= 200 && response.status <= 299) {
 						setBookingErr(false);
 						setOpen(false);
+						refreshBooking();
 					} else {
 						throw new Error(
 							`Encountered something unexpected: ${response.status} ${response.statusText}`
@@ -92,7 +95,7 @@ function ModalBookingScreen({ bookingDate }) {
 								placeholder="Date"
 								label="Date"
 								type="text"
-								value={bookingDate}
+								value={formatBookingDate(bookingDate)}
 								disabled
 							/>
 						</Segment>
