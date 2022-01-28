@@ -52,4 +52,10 @@ module.exports = {
 			template: "./client/src/index.html",
 		}),
 	],
+	resolve: {
+    fallback: {
+      crypto: false, // do not include a polyfill for abc
+      path: false ,
+    },
+  },
 };
