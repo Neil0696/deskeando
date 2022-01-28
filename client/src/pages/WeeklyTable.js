@@ -25,7 +25,9 @@ const desks = [
 const getBookingsByRow = (bookings, rowsCount, week) => {
 	const bookingsByDayWithNoDesk = {};
 	week.forEach((day) => {
-		bookingsByDayWithNoDesk[day] = bookings.filter((booking) => booking.date === day && booking.desk === null );
+		bookingsByDayWithNoDesk[day] = bookings.filter(
+			(booking) => booking.date === day && booking.desk === null
+		);
 	});
 
 	const bookingsByRow = [];
@@ -38,19 +40,28 @@ const getBookingsByRow = (bookings, rowsCount, week) => {
 const getBookingsByDesk = (bookings, week) => {
 	const bookingsByDayWithDesk = {};
 	week.forEach((day) => {
-		bookingsByDayWithDesk[day] = bookings.filter((booking) => booking.date === day && booking.desk !== null  );
+		bookingsByDayWithDesk[day] = bookings.filter(
+			(booking) => booking.date === day && booking.desk !== null
+		);
 	});
 
-	const bookingsByDesk = {}; 
-	desks.forEach((desk)=>{
-		bookingsByDesk[desk.name] = week.map((day) => bookingsByDayWithDesk[day].find((booking)=> booking.desk === desk.name));
+	const bookingsByDesk = {};
+	desks.forEach((desk) => {
+		bookingsByDesk[desk.name] = week.map((day) =>
+			bookingsByDayWithDesk[day].find((booking) => booking.desk === desk.name)
+		);
 	});
-		
+
 	return bookingsByDesk;
+};
+
+const getBookingByDay = (bookings, date) => {
+	return bookings.filter((booking) => booking.date === date).length;
 };
 
 const WeeklyTable = ({ bookings, rowsCount, refreshBooking }) => {
 	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
+	console.log({ bookingsByRow });
 
 	const bookingsByDesk = getBookingsByDesk(bookings, week);
 	return (
@@ -61,13 +72,20 @@ const WeeklyTable = ({ bookings, rowsCount, refreshBooking }) => {
 						<th></th>
 						{week.map((date) => (
 							<th key={date}>
-								{formatBookingDate(date)} <ModalBookingScreen bookingDate={date} refreshBooking={refreshBooking} />
+								{formatBookingDate(date)}{" "}
+								<ModalBookingScreen
+									bookingDate={date}
+									refreshBooking={refreshBooking}
+								/>
+								<br />
+								{getBookingByDay(bookings, date) === 5
+									? "No desk available"
+									: getBookingByDay(bookings, date) + "/5 desks available"}
 							</th>
 						))}
 					</tr>
 				</thead>
 				<tbody>
-					
 					{bookingsByRow.map((row, i) => (
 						<tr key={i}>
 							<td></td>
@@ -76,14 +94,13 @@ const WeeklyTable = ({ bookings, rowsCount, refreshBooking }) => {
 							))}
 						</tr>
 					))}
-					{desks.map((desk)=>(
+					{desks.map((desk) => (
 						<tr key={desk.name}>
 							<td>{desk.name}</td>
 							{bookingsByDesk[desk.name].map((booking, index) => (
 								<td key={index}>{booking?.name}</td>
 							))}
 						</tr>
-
 					))}
 				</tbody>
 			</table>
