@@ -13,13 +13,22 @@ import {
 	Header,
 	Modal,
 	Message,
+	Dropdown,
 } from "semantic-ui-react";
+
+const deskSelection = [
+	{ key: 1, text: "Desk 1", value: 1 },
+	{ key: 2, text: "Desk 2", value: 2 },
+	{ key: 3, text: "Desk 3", value: 3 },
+];
 
 function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
 	const [bookingErr, setBookingErr] = useState(false);
 	const [nameErr, setNameErr] = useState(false);
+	const [dontSelectDesk, setDontSelectDesk] = useState(true);
+	const [deskId, setDeskId] = useState(null);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -27,18 +36,23 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 		if (name === "") {
 			setNameErr(true);
 		} else {
+			let newBooking = {
+				name: name,
+				date: bookingDate,
+			};
+			if (!dontSelectDesk) {
+				newBooking.desk_id = deskId;
+			}
+
 			fetch("/api/bookings", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({
-					name: name,
-					date: bookingDate,
-				}),
+				body: JSON.stringify(newBooking),
 			})
 				.then((response) => {
-					response.json()
+					response.json();
 					if (response.status >= 200 && response.status <= 299) {
 						setBookingErr(false);
 						setOpen(false);
@@ -91,6 +105,9 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 								/>
 							</Form.Field>
 							<Divider inverted />
+
+							<label>Date: </label>
+
 							<Form.Input
 								placeholder="Date"
 								label="Date"
@@ -98,11 +115,26 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 								value={formatBookingDate(bookingDate)}
 								disabled
 							/>
+
+							<input type="text" value={bookingDate} />
 						</Segment>
 						<Segment>
 							<Form.Field>
-								<Checkbox label="I don't care where I sit" defaultChecked />
+								<Checkbox
+									label="I don't care where I sit"
+									onChange={(e, data) => setDontSelectDesk(data.checked)}
+									checked={dontSelectDesk}
+								/>
 							</Form.Field>
+							{!dontSelectDesk && (
+								<Dropdown
+									placeholder="Desk Selection"
+									options={deskSelection}
+									selection
+									value={deskId}
+									onChange={(e, data) => setDeskId(data.value)}
+								/>
+							)}
 						</Segment>
 					</Form>
 				</Modal.Description>
