@@ -12,4 +12,10 @@ module.exports = merge(common, {
 		},
 	},
 	mode: "development",
+	resolve: {
+		fallback: {
+			crypto: false, // do not include a polyfill for abc
+			path: false,
+		},
+	},
 });
