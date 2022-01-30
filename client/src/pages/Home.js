@@ -14,7 +14,6 @@ export function Home() {
 		fetch("/api/bookings")
 			.then((response) => response.json())
 			.then((data) => {
-				// console.log(data, "DATA");
 				setBookings(data);
 			})
 			.catch((err) => console.log(err));
@@ -22,7 +21,7 @@ export function Home() {
 
 	const refreshBooking = () => {
 		setRefreshKey((oldKey) => oldKey + 1);
-	}
+	};
 
 	return (
 		<main role="main">
@@ -36,7 +35,11 @@ export function Home() {
 
 				{/* <Link to="/about/this/site">About</Link> */}
 			</div>
-			<WeeklyTable bookings={bookings} rowsCount={ROWS_COUNT} refreshBooking={refreshBooking} />
+			<WeeklyTable
+				bookings={bookings}
+				rowsCount={ROWS_COUNT}
+				refreshBooking={refreshBooking}
+			/>
 		</main>
 	);
 }

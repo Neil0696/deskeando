@@ -25,16 +25,18 @@ const deskSelection = [
 function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
-	const [bookingErr, setBookingErr] = useState(false);
-	const [nameErr, setNameErr] = useState(false);
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
 	const [deskId, setDeskId] = useState(null);
+	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
+	const [nameErrorMessage, setNameErrorMessage] = useState(null);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
+		setBookingErrorMessage(null);
+
 		if (name === "") {
-			setNameErr(true);
+			setNameErrorMessage("Please enter your name");
 		} else {
 			let newBooking = {
 				name: name,
@@ -52,18 +54,21 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 				body: JSON.stringify(newBooking),
 			})
 				.then((response) => {
-					response.json();
 					if (response.status >= 200 && response.status <= 299) {
-						setBookingErr(false);
 						setOpen(false);
 						refreshBooking();
 					} else {
-						throw new Error(
-							`Encountered something unexpected: ${response.status} ${response.statusText}`
-						);
+						// return so the error is caught by catch
+						return response.json().then((error) => {
+							if (error.field === "name") {
+								setNameErrorMessage(error.message);
+							} else {
+								throw new Error("Booking not created, unexpected error");
+							}
+						});
 					}
 				})
-				.catch((err) => setBookingErr(true));
+				.catch((error) => setBookingErrorMessage(error.message));
 		}
 	};
 
@@ -79,11 +84,11 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 			<Header as="h2" content="Book Your Desk" />
 			<Modal.Content>
 				<Modal.Description>
-					{bookingErr && (
+					{bookingErrorMessage && (
 						<Message
 							error
 							header="An error occurred"
-							content="We couldn't book a desk for you"
+							content={bookingErrorMessage}
 						/>
 					)}
 					<Form>
@@ -91,8 +96,8 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 							<Form.Field>
 								<Form.Input
 									error={
-										nameErr && {
-											content: "Please enter your name",
+										nameErrorMessage && {
+											content: nameErrorMessage,
 											pointing: "below",
 										}
 									}
@@ -100,7 +105,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 									label="Name"
 									onChange={(event) => {
 										setName(event.target.value);
-										setNameErr(false);
+										setNameErrorMessage(null);
 									}}
 								/>
 							</Form.Field>
@@ -144,7 +149,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 					<Button
 						color="black"
 						onClick={() => {
-							setBookingErr(false);
+							setBookingErrorMessage(false);
 							setOpen(false);
 						}}
 					>
