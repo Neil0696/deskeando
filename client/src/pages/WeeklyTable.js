@@ -1,4 +1,3 @@
-import { name } from "file-loader";
 import React from "react";
 
 import { formatBookingDate } from "../util";
@@ -55,11 +54,27 @@ const getBookingsByDesk = (bookings, week) => {
 	return bookingsByDesk;
 };
 
-const getBookingByDay = (bookings, date) => {
-	return bookings.filter((booking) => booking.date === date).length;
+const countAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
+	
+	const countBookingsByDay = bookings.filter(
+		(booking) => booking.date === date
+	).length;
+
+	const availableDesks = maxDesksForDay - countBookingsByDay;
+
+	if (countBookingsByDay >= 0 && countBookingsByDay < maxDesksForDay) {
+		return availableDesks + "/" + maxDesksForDay + " desks available";
+	} else if (countBookingsByDay === maxDesksForDay) {
+		return "No desks available";
+	}
 };
 
-const WeeklyTable = ({ bookings, rowsCount, refreshBooking }) => {
+const WeeklyTable = ({
+	bookings,
+	rowsCount,
+	refreshBooking,
+	maxDesksForDay,
+}) => {
 	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
 	console.log({ bookingsByRow });
 
@@ -78,9 +93,7 @@ const WeeklyTable = ({ bookings, rowsCount, refreshBooking }) => {
 									refreshBooking={refreshBooking}
 								/>
 								<br />
-								{getBookingByDay(bookings, date) === 5
-									? "No desk available"
-									: getBookingByDay(bookings, date) + "/5 desks available"}
+								{countAvailableDesksForDay(bookings, date, maxDesksForDay)}
 							</th>
 						))}
 					</tr>
