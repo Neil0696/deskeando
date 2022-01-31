@@ -110,13 +110,10 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 
 							<Form.Input
 								placeholder="Date"
-								label="Date"
 								type="text"
 								value={formatBookingDate(bookingDate)}
 								disabled
 							/>
-
-							<input type="text" value={bookingDate} />
 						</Segment>
 						<Segment>
 							<Form.Field>
