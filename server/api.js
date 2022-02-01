@@ -10,10 +10,17 @@ router.get("/", (req, res) => {
 router.get("/bookings", async (req, res) => {
 	try {
 		const result = await db.query(
-			"SELECT booking.*,desk_user.username,desk.desk_name from booking INNER JOIN desk_user ON booking.desk_user_id=desk_user.id LEFT OUTER JOIN desk ON booking.desk_id=desk.id ");
+			"SELECT booking.*,desk_user.username,desk.desk_name from booking INNER JOIN desk_user ON booking.desk_user_id=desk_user.id LEFT OUTER JOIN desk ON booking.desk_id=desk.id "
+		);
 		// convert array with objects having {username, booking_date} into {name,desk_id,desk,date}
 		const bookings = result.rows.map((row) => {
-			return { id: row.id, name: row.username, desk_id: row.desk_id, desk: row.desk_name, date: row.booking_date };
+			return {
+				id: row.id,
+				name: row.username,
+				desk_id: row.desk_id,
+				desk: row.desk_name,
+				date: row.booking_date,
+			};
 		});
 		res.json(bookings);
 	} catch (e) {
@@ -22,7 +29,7 @@ router.get("/bookings", async (req, res) => {
 	}
 });
 
-router.post("/bookings", async function (req, res) {
+router.post("/bookings", async function(req, res) {
 	const userName = req.body.name;
 	const deskId = req.body.desk_id;
 	//const deskName = req.body.desk;
@@ -40,15 +47,22 @@ router.post("/bookings", async function (req, res) {
 		// 	[deskName]
 		// );
 		if (userResult.rows.length === 0) {
-			return res.status(400).send(`User with name ${userName} does not exist`);
+			return res.status(400).send({
+				message: `User with name ${userName} does not exist`,
+				field: "name",
+			});
 		}
 		const userId = userResult.rows[0].id;
 		//const deskId = tableResult.rows[0].id;
-		const bookingResult = await db.query(insertQuery, [userId, deskId, bookingDate]);
+		const bookingResult = await db.query(insertQuery, [
+			userId,
+			deskId,
+			bookingDate,
+		]);
 		res.send("Booking created!");
 	} catch (e) {
 		console.error(e);
-		res.sendStatus(400);
+		res.status(400).json({});
 	}
 });
 
