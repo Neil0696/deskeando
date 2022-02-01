@@ -54,18 +54,17 @@ const getBookingsByDesk = (bookings, week) => {
 	return bookingsByDesk;
 };
 
-const countAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
-	
+const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	const countBookingsByDay = bookings.filter(
 		(booking) => booking.date === date
 	).length;
 
 	const availableDesks = maxDesksForDay - countBookingsByDay;
 
-	if (countBookingsByDay >= 0 && countBookingsByDay < maxDesksForDay) {
-		return availableDesks + "/" + maxDesksForDay + " desks available";
-	} else if (countBookingsByDay === maxDesksForDay) {
+	if (availableDesks === 0) {
 		return "No desks available";
+	} else {
+		return availableDesks + "/" + maxDesksForDay + " desks available";
 	}
 };
 
@@ -87,13 +86,13 @@ const WeeklyTable = ({
 						<th></th>
 						{week.map((date) => (
 							<th key={date}>
-								{formatBookingDate(date)}{" "}
+								{formatBookingDate(date)}
 								<ModalBookingScreen
 									bookingDate={date}
 									refreshBooking={refreshBooking}
 								/>
 								<br />
-								{countAvailableDesksForDay(bookings, date, maxDesksForDay)}
+								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
 							</th>
 						))}
 					</tr>
