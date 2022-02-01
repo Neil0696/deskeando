@@ -12,35 +12,64 @@ import {
 	Button,
 	Header,
 	Modal,
+	Message,
+	Dropdown,
 } from "semantic-ui-react";
+
+const deskSelection = [
+	{ key: 1, text: "Desk 1", value: 1 },
+	{ key: 2, text: "Desk 2", value: 2 },
+	{ key: 3, text: "Desk 3", value: 3 },
+];
 
 function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
+	const [dontSelectDesk, setDontSelectDesk] = useState(true);
+	const [deskId, setDeskId] = useState(null);
+	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
+	const [nameErrorMessage, setNameErrorMessage] = useState(null);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		fetch("/api/bookings", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
+		setBookingErrorMessage(null);
+
+		if (name === "") {
+			setNameErrorMessage("Please enter your name");
+		} else {
+			let newBooking = {
 				name: name,
 				date: bookingDate,
-			}),
-		}).then((response) => {
-			console.log(response.json());
-			if (response.status >= 200 && response.status <= 299) {
-				setOpen(false);
-				refreshBooking();
-			} else {
-				throw new Error(
-					`Encountered something unexpected: ${response.status} ${response.statusText}`
-				);
+			};
+			if (!dontSelectDesk) {
+				newBooking.desk_id = deskId;
 			}
-		});
+
+			fetch("/api/bookings", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(newBooking),
+			})
+				.then((response) => {
+					if (response.status >= 200 && response.status <= 299) {
+						setOpen(false);
+						refreshBooking();
+					} else {
+						// return so the error is caught by catch
+						return response.json().then((error) => {
+							if (error.field === "name") {
+								setNameErrorMessage(error.message);
+							} else {
+								throw new Error("Booking not created, unexpected error");
+							}
+						});
+					}
+				})
+				.catch((error) => setBookingErrorMessage(error.message));
+		}
 	};
 
 	return (
@@ -55,19 +84,37 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 			<Header as="h2" content="Book Your Desk" />
 			<Modal.Content>
 				<Modal.Description>
-					<form>
+					{bookingErrorMessage && (
+						<Message
+							error
+							header="An error occurred"
+							content={bookingErrorMessage}
+						/>
+					)}
+					<Form>
 						<Segment>
 							<Form.Field>
-								<label>Name: </label>
-								<input
+								<Form.Input
+									error={
+										nameErrorMessage && {
+											content: nameErrorMessage,
+											pointing: "below",
+										}
+									}
 									placeholder="Name"
-									value={name}
-									onChange={(event) => setName(event.target.value)}
+									label="Name"
+									onChange={(event) => {
+										setName(event.target.value);
+										setNameErrorMessage(null);
+									}}
 								/>
 							</Form.Field>
 							<Divider inverted />
+
 							<label>Date: </label>
-							<input
+
+							<Form.Input
+								placeholder="Date"
 								type="text"
 								value={formatBookingDate(bookingDate)}
 								disabled
@@ -75,15 +122,34 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 						</Segment>
 						<Segment>
 							<Form.Field>
-								<Checkbox label="I don't care where I sit" defaultChecked />
+								<Checkbox
+									label="I don't care where I sit"
+									onChange={(e, data) => setDontSelectDesk(data.checked)}
+									checked={dontSelectDesk}
+								/>
 							</Form.Field>
+							{!dontSelectDesk && (
+								<Dropdown
+									placeholder="Desk Selection"
+									options={deskSelection}
+									selection
+									value={deskId}
+									onChange={(e, data) => setDeskId(data.value)}
+								/>
+							)}
 						</Segment>
-					</form>
+					</Form>
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>
 				<Button.Group>
-					<Button color="black" onClick={() => setOpen(false)}>
+					<Button
+						color="black"
+						onClick={() => {
+							setBookingErrorMessage(false);
+							setOpen(false);
+						}}
+					>
 						Cancel
 					</Button>
 					<Button.Or />

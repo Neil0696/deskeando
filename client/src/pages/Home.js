@@ -22,7 +22,7 @@ export function Home() {
 
 	const refreshBooking = () => {
 		setRefreshKey((oldKey) => oldKey + 1);
-	}
+	};
 
 	return (
 		<main role="main">
@@ -36,8 +36,12 @@ export function Home() {
 
 				{/* <Link to="/about/this/site">About</Link> */}
 			</div>
-			<WeeklyTable bookings={bookings} rowsCount={ROWS_COUNT} maxDesksForDay={MAX_DESKS_FOR_DAY} refreshBooking={refreshBooking} />
-		</main>
+      <WeeklyTable
+				bookings={bookings}
+				rowsCount={ROWS_COUNT}
+				refreshBooking={refreshBooking}
+			/>
+    </main>
 	);
 }
 
