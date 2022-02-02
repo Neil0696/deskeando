@@ -1,13 +1,10 @@
 * {
-  font-family: sans-serif;
+	font-family: sans-serif;
 }
-
 
 .logo {
-	width: 300px;
+	width: 150px;
 	display: block;
-  	margin-right: auto; 
-	margin-top: -50px;
+	margin-right: auto;
+	margin-top: -25px;
 }
-
-
