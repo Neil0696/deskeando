@@ -2,6 +2,7 @@ import React from "react";
 
 import { useState } from "react";
 import { formatBookingDate } from "../util";
+import FloorPlan from "./FloorPlan";
 
 import {
 	Icon,
@@ -78,11 +79,18 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 			onOpen={() => setOpen(true)}
 			open={open}
 			trigger={
-				<Icon link name="add" size="small" circular inverted color="teal" />
+				<Icon
+					link
+					name="add"
+					size="small"
+					circular
+					inverted
+					color="teal"
+				/>
 			}
 		>
 			<Header as="h2" content="Book Your Desk" />
-			<Modal.Content>
+			<Modal.Content scrolling>
 				<Modal.Description>
 					{bookingErrorMessage && (
 						<Message
@@ -129,13 +137,17 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 								/>
 							</Form.Field>
 							{!dontSelectDesk && (
-								<Dropdown
-									placeholder="Desk Selection"
-									options={deskSelection}
-									selection
-									value={deskId}
-									onChange={(e, data) => setDeskId(data.value)}
-								/>
+								<div>
+									<Dropdown
+										placeholder="Desk Selection"
+										options={deskSelection}
+										selection
+										value={deskId}
+										onChange={(e, data) => setDeskId(data.value)}
+									/>
+									<br />
+									<FloorPlan />
+								</div>
 							)}
 						</Segment>
 					</Form>
