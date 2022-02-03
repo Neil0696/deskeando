@@ -62,6 +62,8 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 						return response.json().then((error) => {
 							if (error.field === "name") {
 								setNameErrorMessage(error.message);
+							} else if (error.message) {
+								setBookingErrorMessage(error.message);
 							} else {
 								throw new Error("Booking not created, unexpected error");
 							}

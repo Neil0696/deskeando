@@ -52,6 +52,20 @@ router.post("/bookings", async function(req, res) {
 				field: "name",
 			});
 		}
+
+		const bookingsByDayResult = await db.query(
+			"select * from booking where booking_date = $1",
+			[bookingDate]
+		);
+
+		if (bookingsByDayResult.rows.length >= 5) {
+			return res.status(400).send({
+				message: `No desks available for ${bookingDate}`,
+			});
+		}
+
+		// console.log(testResult);
+
 		const userId = userResult.rows[0].id;
 		//const deskId = tableResult.rows[0].id;
 		const bookingResult = await db.query(insertQuery, [
