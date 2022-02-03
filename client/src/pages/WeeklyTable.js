@@ -12,14 +12,6 @@ const week = [
 	"2022-01-20T00:00:00.000Z",
 	"2022-01-21T00:00:00.000Z",
 ];
-const desks = [
-	{ id: 1, name: "desk 1" },
-	{ id: 2, name: "desk 2" },
-	{ id: 3, name: "desk 3" },
-	{ id: 4, name: "desk 4" },
-	{ id: 5, name: "desk 5" },
-	{ id: 6, name: "desk 6" },
-];
 
 const getBookingsByRow = (bookings, rowsCount, week) => {
 	const bookingsByDayWithNoDesk = {};
@@ -36,7 +28,7 @@ const getBookingsByRow = (bookings, rowsCount, week) => {
 	return bookingsByRow;
 };
 
-const getBookingsByDesk = (bookings, week) => {
+const getBookingsByDesk = (bookings, week, desks) => {
 	const bookingsByDayWithDesk = {};
 	week.forEach((day) => {
 		bookingsByDayWithDesk[day] = bookings.filter(
@@ -70,6 +62,7 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 
 const WeeklyTable = ({
 	bookings,
+	desks,
 	rowsCount,
 	refreshBooking,
 	maxDesksForDay,
@@ -77,7 +70,7 @@ const WeeklyTable = ({
 	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
 	console.log({ bookingsByRow });
 
-	const bookingsByDesk = getBookingsByDesk(bookings, week);
+	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
 	return (
 		<div>
 			<table>
@@ -90,6 +83,7 @@ const WeeklyTable = ({
 								<ModalBookingScreen
 									bookingDate={date}
 									refreshBooking={refreshBooking}
+									desks={desks}
 								/>
 								<br />
 								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}

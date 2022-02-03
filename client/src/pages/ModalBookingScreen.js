@@ -17,19 +17,19 @@ import {
 	Dropdown,
 } from "semantic-ui-react";
 
-const deskSelection = [
-	{ key: 1, text: "Desk 1", value: 1 },
-	{ key: 2, text: "Desk 2", value: 2 },
-	{ key: 3, text: "Desk 3", value: 3 },
-];
-
-function ModalBookingScreen({ bookingDate, refreshBooking }) {
+function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
 	const [deskId, setDeskId] = useState(null);
 	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
 	const [nameErrorMessage, setNameErrorMessage] = useState(null);
+
+	const deskSelection = desks.map((desk) => ({
+		key: desk.id,
+		text: desk.name,
+		value: desk.id,
+	}));
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -79,14 +79,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 			onOpen={() => setOpen(true)}
 			open={open}
 			trigger={
-				<Icon
-					link
-					name="add"
-					size="small"
-					circular
-					inverted
-					color="teal"
-				/>
+				<Icon link name="add" size="small" circular inverted color="teal" />
 			}
 		>
 			<Header as="h2" content="Book Your Desk" />
@@ -146,7 +139,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 										onChange={(e, data) => setDeskId(data.value)}
 									/>
 									<br />
-									<FloorPlan />
+									<FloorPlan desks={desks} />
 								</div>
 							)}
 						</Segment>
