@@ -15,13 +15,19 @@ const week = [
 	"2022-01-21T00:00:00.000Z",
 ];
 
-const getBookingsByRow = (bookings, rowsCount, week) => {
+const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
 	week.forEach((day) => {
 		bookingsByDayWithNoDesk[day] = bookings.filter(
 			(booking) => booking.date === day && booking.desk === null
 		);
 	});
+
+	const rowsCount = Math.max(
+		...Object.values(bookingsByDayWithNoDesk).map(
+			(bookingsForDay) => bookingsForDay.length
+		)
+	);
 
 	const bookingsByRow = [];
 	for (let i = 0; i < rowsCount; i++) {
@@ -62,28 +68,22 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	}
 };
 
-const WeeklyTable = ({
-	bookings,
-	desks,
-	rowsCount,
-	refreshBooking,
-	maxDesksForDay,
-}) => {
+const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 	const [currentMonday, setCurrentMonday] = useState(new Date(2022, 0, 17));
+
 	let week = [];
 	const year = currentMonday.getFullYear();
 	const month = currentMonday.getMonth();
 	let date = currentMonday.getDate();
 
-	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
 	for (let i = 0; i < 5; i++) {
 		// this will even work if we cross over into the next month!!
 		week.push(new Date(year, month, date + i).toISOString());
 	}
-	console.log(week);
+	
 	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
-	console.log(bookingsByRow);
-	const bookingsByDesk = getBookingsByDesk(bookings, week);
+	
+	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
 	// function setThisMonday() {
 
 	// }
