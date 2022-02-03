@@ -1,5 +1,14 @@
 import React from "react";
 
+const desks = [
+	{ id: 1, x: 0, y: 0, r: 0 },
+	{ id: 2, x: 175, y: 0, r: 180 },
+	{ id: 3, x: 0, y: 170, r: 0 },
+	{ id: 4, x: 175, y: 170, r: 180 },
+	{ id: 5, x: 0, y: 340, r: 0 },
+	{ id: 6, x: 175, y: 340, r: 180 },
+];
+
 const Desk = (props) => {
 	return (
 		<g>
@@ -41,11 +50,20 @@ const FloorPlan = () => {
 				y="0.5"
 			/>
 			<g id="Group1" transform="translate(262 100)">
-				<g transform="translate(0 0)">
+				{desks.map((desk, i) => (
+					<g
+						key={i}
+						transform={`translate(${desk.x}, ${desk.y}) rotate(${desks.r}, 75, 75)`}
+					>
+						<Desk desk={desks.id} />
+					</g>
+				))}
+				
+				{/* <g transform="translate(0 0)">
 					<Desk desk="1" />
 				</g>
 				<g transform="translate(175 0) rotate(180 75 75)">
-					<Desk desk="2" transform="rotate(180)"/>
+					<Desk desk="2" transform="rotate(180)" />
 				</g>
 				<g transform="translate(0 170)">
 					<Desk desk="3" />
@@ -58,7 +76,7 @@ const FloorPlan = () => {
 				</g>
 				<g transform="translate(175 340) rotate(180 75 75)">
 					<Desk desk="6" />
-				</g>
+				</g> */}
 			</g>
 		</svg>
 	);
