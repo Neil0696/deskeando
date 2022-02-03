@@ -4,12 +4,19 @@ const Desk = (props) => {
 	return (
 		<g>
 			<rect
-				style={{ fill: "#fff", stroke: "#000000", strokeWidth: "1" }}
+				style={{
+					fill: "#3F94D5",
+					stroke: "#000000",
+					strokeWidth: "1",
+					fillOpacity: 0.6,
+				}}
 				width={150}
 				height={150}
 				x={0.5}
 				y={0.5}
+				rx={15}
 			/>
+			<circle cx="-55" cy="75" r="35" />
 			<text fontSize={40} x={64} y={90}>
 				{props.desk}
 			</text>
@@ -37,19 +44,19 @@ const FloorPlan = () => {
 				<g transform="translate(0 0)">
 					<Desk desk="1" />
 				</g>
-				<g transform="translate(175 0)">
-					<Desk desk="2" />
+				<g transform="translate(175 0) rotate(180 75 75)">
+					<Desk desk="2" transform="rotate(180)"/>
 				</g>
 				<g transform="translate(0 170)">
 					<Desk desk="3" />
 				</g>
-				<g transform="translate(175 170)">
+				<g transform="translate(175 170) rotate(180 75 75)">
 					<Desk desk="4" />
 				</g>
 				<g transform="translate(0 340)">
 					<Desk desk="5" />
 				</g>
-				<g transform="translate(175 340)">
+				<g transform="translate(175 340) rotate(180 75 75)">
 					<Desk desk="6" />
 				</g>
 			</g>
