@@ -3,8 +3,21 @@ import db from "./db";
 
 const router = new Router();
 
+const desks = [
+	{ id: 1, name: "desk 1", x: 0, y: 0, r: 0 },
+	{ id: 2, name: "desk 2", x: 175, y: 0, r: 180 },
+	{ id: 3, name: "desk 3", x: 0, y: 170, r: 0 },
+	{ id: 4, name: "desk 4", x: 175, y: 170, r: 180 },
+	{ id: 5, name: "desk 5", x: 0, y: 340, r: 0 },
+	{ id: 6, name: "desk 6", x: 175, y: 340, r: 180 },
+];
+
 router.get("/", (req, res) => {
 	res.json({ message: "Hello, world!" });
+});
+
+router.get("/desks", (req, res) => {
+	res.json(desks);
 });
 
 router.get("/bookings", async (req, res) => {
@@ -29,7 +42,7 @@ router.get("/bookings", async (req, res) => {
 	}
 });
 
-router.post("/bookings", async function(req, res) {
+router.post("/bookings", async function (req, res) {
 	const userName = req.body.name;
 	const deskId = req.body.desk_id;
 	//const deskName = req.body.desk;
