@@ -80,9 +80,8 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 		// this will even work if we cross over into the next month!!
 		week.push(new Date(year, month, date + i).toISOString());
 	}
-	
-	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
-	
+
+	const bookingsByRow = getBookingsByRow(bookings, week);
 	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
 	// function setThisMonday() {
 
