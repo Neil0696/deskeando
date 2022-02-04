@@ -90,7 +90,46 @@ const WeeklyTable = ({
 	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
 	console.log(bookingsByRow);
 	const bookingsByDesk = getBookingsByDesk(bookings, week);
+
 	// function setThisMonday() {
+	// 	setCurrentMonday((currentMonday) => {
+	// 		return new Date(
+	// 			currentMonday.getFullYear(),
+	// 			currentMonday.getMonth(),
+	// 			currentMonday.getDate()
+	// 		);
+	// 	});
+	// }
+	function setThisMonday() {
+		let date = new Date();
+		let dayNumber = date.getDay();
+		const mondayNumber = 1;
+		let daysAfterMonday = dayNumber-mondayNumber;
+		date.setDate(date.getDate()-daysAfterMonday);
+		// let date = new Date();
+		// let day = date.getDay() || 7;
+		// if (day !== 1) date.setHours(-24 * (day - 1));
+		// console.log(date);
+		// // setCurrentMonday((date) => {
+			return 
+				date.getFullYear(),
+				date.getMonth(),
+				date.getDate()
+		//	)});
+	}
+	function getMonday(d) {
+		d = new Date(d);
+		var day = d.getDay(),
+			diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+		return new Date(d.setDate(diff));
+	  }
+
+	// function getMonday(d) {
+	// 	d = new Date(d);
+	// 	var day = d.getDay(),
+	// 		diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
+	// 	return new Date(d.setDate(diff));
+	//   }
 
 	// }
 	function setNextMonday() {
@@ -116,7 +155,7 @@ const WeeklyTable = ({
 		<div>
 			<div>
 				{/* <tr> */}
-				<span>This Week</span>
+				<button onClick={setThisMonday}>This Week</button>
 				<button className={"inner"} onClick={setPreviousMonday}>
 					Previous week
 				</button>
