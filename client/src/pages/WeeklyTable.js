@@ -1,9 +1,11 @@
 import React from "react";
+import { useState } from "react";
 
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 
 import "./WeeklyTable.css";
+// const DEFAULT_MONDAY = new Date(2022, 0, 17);
 
 const week = [
 	"2022-01-17T00:00:00.000Z",
@@ -12,22 +14,20 @@ const week = [
 	"2022-01-20T00:00:00.000Z",
 	"2022-01-21T00:00:00.000Z",
 ];
-const desks = [
-	{ id: 1, name: "desk 1" },
-	{ id: 2, name: "desk 2" },
-	{ id: 3, name: "desk 3" },
-	{ id: 4, name: "desk 4" },
-	{ id: 5, name: "desk 5" },
-	{ id: 6, name: "desk 6" },
-];
 
-const getBookingsByRow = (bookings, rowsCount, week) => {
+const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
 	week.forEach((day) => {
 		bookingsByDayWithNoDesk[day] = bookings.filter(
 			(booking) => booking.date === day && booking.desk === null
 		);
 	});
+
+	const rowsCount = Math.max(
+		...Object.values(bookingsByDayWithNoDesk).map(
+			(bookingsForDay) => bookingsForDay.length
+		)
+	);
 
 	const bookingsByRow = [];
 	for (let i = 0; i < rowsCount; i++) {
@@ -36,7 +36,7 @@ const getBookingsByRow = (bookings, rowsCount, week) => {
 	return bookingsByRow;
 };
 
-const getBookingsByDesk = (bookings, week) => {
+const getBookingsByDesk = (bookings, week, desks) => {
 	const bookingsByDayWithDesk = {};
 	week.forEach((day) => {
 		bookingsByDayWithDesk[day] = bookings.filter(
@@ -68,18 +68,56 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	}
 };
 
-const WeeklyTable = ({
-	bookings,
-	rowsCount,
-	refreshBooking,
-	maxDesksForDay,
-}) => {
-	const bookingsByRow = getBookingsByRow(bookings, rowsCount, week);
-	console.log({ bookingsByRow });
+const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
+	const [currentMonday, setCurrentMonday] = useState(new Date(2022, 0, 17));
 
-	const bookingsByDesk = getBookingsByDesk(bookings, week);
+	let week = [];
+	const year = currentMonday.getFullYear();
+	const month = currentMonday.getMonth();
+	let date = currentMonday.getDate();
+
+	for (let i = 0; i < 5; i++) {
+		// this will even work if we cross over into the next month!!
+		week.push(new Date(year, month, date + i).toISOString());
+	}
+
+	const bookingsByRow = getBookingsByRow(bookings, week);
+	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
+	// function setThisMonday() {
+
+	// }
+	function setNextMonday() {
+		setCurrentMonday((currentMonday) => {
+			return new Date(
+				currentMonday.getFullYear(),
+				currentMonday.getMonth(),
+				currentMonday.getDate() + 7
+			);
+		});
+	}
+	function setPreviousMonday() {
+		setCurrentMonday((currentMonday) => {
+			return new Date(
+				currentMonday.getFullYear(),
+				currentMonday.getMonth(),
+				currentMonday.getDate() - 7
+			);
+		});
+	}
+
 	return (
 		<div>
+			<div>
+				{/* <tr> */}
+				<span>This Week</span>
+				<button className={"inner"} onClick={setPreviousMonday}>
+					Previous week
+				</button>
+				<button className={"inner"} onClick={setNextMonday}>
+					Next Week
+				</button>
+				{/* </tr> */}
+			</div>
 			<table>
 				<thead>
 					<tr>
@@ -90,6 +128,7 @@ const WeeklyTable = ({
 								<ModalBookingScreen
 									bookingDate={date}
 									refreshBooking={refreshBooking}
+									desks={desks}
 								/>
 								<br />
 								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}

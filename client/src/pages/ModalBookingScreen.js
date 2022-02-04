@@ -2,6 +2,7 @@ import React from "react";
 
 import { useState } from "react";
 import { formatBookingDate } from "../util";
+import FloorPlan from "./FloorPlan";
 
 import {
 	Icon,
@@ -16,13 +17,7 @@ import {
 	Dropdown,
 } from "semantic-ui-react";
 
-const deskSelection = [
-	{ key: 1, text: "Desk 1", value: 1 },
-	{ key: 2, text: "Desk 2", value: 2 },
-	{ key: 3, text: "Desk 3", value: 3 },
-];
-
-function ModalBookingScreen({ bookingDate, refreshBooking }) {
+function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
@@ -31,6 +26,12 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [nameErrorMessage, setNameErrorMessage] = useState(null);
 	const [dateErrorMessage, setDateErrorMessage] = useState(null);
 	const [deskErrorMessage, setDeskErrorMessage] = useState(null);
+
+	const deskSelection = desks.map((desk) => ({
+		key: desk.id,
+		text: desk.name,
+		value: desk.id,
+	}));
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -88,7 +89,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 			}
 		>
 			<Header as="h2" content="Book Your Desk" />
-			<Modal.Content>
+			<Modal.Content scrolling>
 				<Modal.Description>
 					{bookingErrorMessage && (
 						<Message
@@ -144,14 +145,18 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 								<p style={{ color: "maroon" }}>{deskErrorMessage}</p>
 							)}
 							{!dontSelectDesk && (
-								<Dropdown
-									error={!!deskErrorMessage}
-									placeholder="Desk Selection"
-									options={deskSelection}
-									selection
-									value={deskId}
-									onChange={(e, data) => setDeskId(data.value)}
-								/>
+								<div>
+									<Dropdown
+										error={!!deskErrorMessage}
+										placeholder="Desk Selection"
+										options={deskSelection}
+										selection
+										value={deskId}
+										onChange={(e, data) => setDeskId(data.value)}
+									/>
+									<br />
+									<FloorPlan desks={desks} />
+								</div>
 							)}
 						</Segment>
 					</Form>
