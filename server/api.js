@@ -42,10 +42,7 @@ router.post("/bookings", async function(req, res) {
 			"SELECT id from desk_user WHERE username=$1",
 			[userName]
 		);
-		// const tableResult = await db.query(
-		// 	"SELECT id from desk WHERE desk_table_name=$2",
-		// 	[deskName]
-		// );
+
 		if (userResult.rows.length === 0) {
 			return res.status(400).send({
 				message: `User with name ${userName} does not exist`,
@@ -61,6 +58,7 @@ router.post("/bookings", async function(req, res) {
 		if (bookingsByDayResult.rows.length >= 5) {
 			return res.status(400).send({
 				message: `No desks available for ${bookingDate}`,
+				field: "date",
 			});
 		}
 
@@ -69,13 +67,12 @@ router.post("/bookings", async function(req, res) {
 			if (test) {
 				return res.status(400).send({
 					message: `Desk ${deskId} is already taken`,
+					field: "desk",
 				});
 			}
 		}
-		// console.log(testResult);
 
 		const userId = userResult.rows[0].id;
-		//const deskId = tableResult.rows[0].id;
 		const bookingResult = await db.query(insertQuery, [
 			userId,
 			deskId,
