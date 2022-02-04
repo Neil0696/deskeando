@@ -29,6 +29,8 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 	const [deskId, setDeskId] = useState(null);
 	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
 	const [nameErrorMessage, setNameErrorMessage] = useState(null);
+	const [dateErrorMessage, setDateErrorMessage] = useState(null);
+	const [deskErrorMessage, setDeskErrorMessage] = useState(null);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -62,8 +64,10 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 						return response.json().then((error) => {
 							if (error.field === "name") {
 								setNameErrorMessage(error.message);
-							} else if (error.message) {
-								setBookingErrorMessage(error.message);
+							} else if (error.field === "date") {
+								setDateErrorMessage(error.message);
+							} else if (error.field === "desk") {
+								setDeskErrorMessage(error.message);
 							} else {
 								throw new Error("Booking not created, unexpected error");
 							}
@@ -116,6 +120,12 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 							<label>Date: </label>
 
 							<Form.Input
+								error={
+									dateErrorMessage && {
+										content: dateErrorMessage,
+										pointing: "below",
+									}
+								}
 								placeholder="Date"
 								type="text"
 								value={formatBookingDate(bookingDate)}
@@ -130,8 +140,12 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 									checked={dontSelectDesk}
 								/>
 							</Form.Field>
+							{deskErrorMessage && (
+								<p style={{ color: "maroon" }}>{deskErrorMessage}</p>
+							)}
 							{!dontSelectDesk && (
 								<Dropdown
+									error={!!deskErrorMessage}
 									placeholder="Desk Selection"
 									options={deskSelection}
 									selection
@@ -148,7 +162,11 @@ function ModalBookingScreen({ bookingDate, refreshBooking }) {
 					<Button
 						color="black"
 						onClick={() => {
-							setBookingErrorMessage(false);
+							setDateErrorMessage(null);
+							setBookingErrorMessage(null);
+							setNameErrorMessage(null);
+							setDeskErrorMessage(null);
+							setName(null);
 							setOpen(false);
 						}}
 					>
