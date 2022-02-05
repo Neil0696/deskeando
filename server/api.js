@@ -20,6 +20,12 @@ router.get("/desks", (req, res) => {
 	res.json(desks);
 });
 
+router.get("/users", (req, res) => {
+	db.query("SELECT * FROM desk_user", (error, result) => {
+		res.json(result.rows);
+	});
+});
+
 router.get("/bookings", async (req, res) => {
 	try {
 		const result = await db.query(
@@ -42,7 +48,7 @@ router.get("/bookings", async (req, res) => {
 	}
 });
 
-router.post("/bookings", async function (req, res) {
+router.post("/bookings", async function(req, res) {
 	const userName = req.body.name;
 	const deskId = req.body.desk_id;
 	//const deskName = req.body.desk;

@@ -17,7 +17,7 @@ import {
 	Dropdown,
 } from "semantic-ui-react";
 
-function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
+function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState("");
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
@@ -31,6 +31,12 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 		key: desk.id,
 		text: desk.name,
 		value: desk.id,
+	}));
+
+	const testUser = users.map((e) => ({
+		key: e.id,
+		text: e.username,
+		value: e.username,
 	}));
 
 	const handleSubmit = (event) => {
@@ -101,7 +107,26 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 					<Form>
 						<Segment>
 							<Form.Field>
-								<Form.Input
+								{nameErrorMessage && (
+									<Message error content={nameErrorMessage} />
+									// <p style={{ color: "maroon" }}>{nameErrorMessage}</p>
+								)}
+								<Dropdown
+									error={!!nameErrorMessage}
+									placeholder="Select your name"
+									label="name"
+									options={testUser}
+									selection
+									search
+									value={name}
+									fluid
+									text={name}
+									onChange={(e, user) => {
+										setName(e.target.value);
+										setNameErrorMessage(null);
+									}}
+								/>
+								{/* <Form.Input
 									error={
 										nameErrorMessage && {
 											content: nameErrorMessage,
@@ -114,7 +139,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 										setName(event.target.value);
 										setNameErrorMessage(null);
 									}}
-								/>
+								/> */}
 							</Form.Field>
 							<Divider inverted />
 

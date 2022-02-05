@@ -55,9 +55,8 @@ const getBookingsByDesk = (bookings, week, desks) => {
 };
 
 const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
-	const countBookingsByDay = bookings.filter(
-		(booking) => booking.date === date
-	).length;
+	const countBookingsByDay = bookings.filter((booking) => booking.date === date)
+		.length;
 
 	const availableDesks = maxDesksForDay - countBookingsByDay;
 
@@ -68,7 +67,13 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	}
 };
 
-const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
+const WeeklyTable = ({
+	bookings,
+	desks,
+	refreshBooking,
+	maxDesksForDay,
+	users,
+}) => {
 	const [currentMonday, setCurrentMonday] = useState(new Date(2022, 0, 17));
 
 	let week = [];
@@ -129,6 +134,7 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 									bookingDate={date}
 									refreshBooking={refreshBooking}
 									desks={desks}
+									users={users}
 								/>
 								<br />
 								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
