@@ -56,23 +56,21 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 				},
 				body: JSON.stringify(newBooking),
 			})
-				.then((response) => {
+				.then(async (response) => {
 					if (response.status >= 200 && response.status <= 299) {
 						setOpen(false);
 						refreshBooking();
 					} else {
-						// return so the error is caught by catch
-						return response.json().then((error) => {
-							if (error.field === "name") {
-								setNameErrorMessage(error.message);
-							} else if (error.field === "date") {
-								setDateErrorMessage(error.message);
-							} else if (error.field === "desk") {
-								setDeskErrorMessage(error.message);
-							} else {
-								throw new Error("Booking not created, unexpected error");
-							}
-						});
+						const error = await response.json();
+						if (error.field === "name") {
+							setNameErrorMessage(error.message);
+						} else if (error.field === "date") {
+							setDateErrorMessage(error.message);
+						} else if (error.field === "desk") {
+							setDeskErrorMessage(error.message);
+						} else {
+							throw new Error("Booking not created, unexpected error");
+						}
 					}
 				})
 				.catch((error) => setBookingErrorMessage(error.message));
