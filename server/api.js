@@ -81,8 +81,10 @@ router.post("/bookings", async function(req, res) {
 		}
 
 		if (deskId !== undefined) {
-			const test = bookingsByDayResult.rows.find((e) => e.desk_id === deskId);
-			if (test) {
+			const isDeskIdAlreadyTaken = bookingsByDayResult.rows.find(
+				(e) => e.desk_id === deskId
+			);
+			if (isDeskIdAlreadyTaken) {
 				return res.status(400).send({
 					message: `Desk ${deskId} is already taken`,
 					field: "desk",
