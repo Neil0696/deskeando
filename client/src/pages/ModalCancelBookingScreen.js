@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon, Button, Header, Modal, Segment } from "semantic-ui-react";
+import { formatBookingDate } from "../util";
 
 function ModalCancelBookingScreen({ booking, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
@@ -32,8 +33,10 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 			<Modal.Content>
 				<Modal.Description>
 					<Segment>
-						<pre>{JSON.stringify(booking, null, 2)}</pre>
-						<p>Are you sure you want delete your booking?</p>
+						<p>
+							Are you sure you want delete your booking for{" "}
+							{formatBookingDate(booking.date)}?
+						</p>
 					</Segment>
 				</Modal.Description>
 			</Modal.Content>
