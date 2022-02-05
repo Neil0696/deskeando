@@ -1,5 +1,10 @@
 import { Router } from "express";
 import db from "./db";
+import moment from "moment";
+
+export const formatBookingDate = (d) => {
+	return moment(d).format("ddd MMM Do");
+};
 
 const router = new Router();
 
@@ -42,7 +47,7 @@ router.get("/bookings", async (req, res) => {
 	}
 });
 
-router.post("/bookings", async function (req, res) {
+router.post("/bookings", async function(req, res) {
 	const userName = req.body.name;
 	const deskId = req.body.desk_id;
 	//const deskName = req.body.desk;
@@ -70,12 +75,12 @@ router.post("/bookings", async function (req, res) {
 
 		if (bookingsByDayResult.rows.length >= 5) {
 			return res.status(400).send({
-				message: `No desks available for ${bookingDate}`,
+				message: `No desks available for ${formatBookingDate(bookingDate)}`,
 				field: "date",
 			});
 		}
 
-		if (deskId) {
+		if (deskId !== undefined) {
 			const test = bookingsByDayResult.rows.find((e) => e.desk_id === deskId);
 			if (test) {
 				return res.status(400).send({
