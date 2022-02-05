@@ -36,3 +36,11 @@ th {
 .inner {
 	display: inline-block;
 }
+
+.hide {
+	display: none;
+}
+
+.visible-on-hover:hover .hide {
+	display: contents;
+}
