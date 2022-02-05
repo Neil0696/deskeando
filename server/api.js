@@ -16,8 +16,25 @@ router.get("/", (req, res) => {
 	res.json({ message: "Hello, world!" });
 });
 
-router.get("/desks", (req, res) => {
-	res.json(desks);
+router.get("/desks", async (req, res) => {
+	try {
+		const deskResult = await db.query("SELECT * from desk;");
+		// convert array with objects having {username, booking_date} into {name,desk_id,desk,date}
+
+		const desks = deskResult.rows.map((row) => {
+			return {
+				id: row.id,
+				desk: row.desk_name,
+				xCoor:row.x,
+				yCoor:row.y,
+				rot:row.r,
+			};
+		});
+		res.json(desks);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
 
 router.get("/bookings", async (req, res) => {

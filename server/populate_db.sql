@@ -5,12 +5,15 @@ INSERT INTO desk_user (username) VALUES ('Adeola');
 INSERT INTO desk_user (username) VALUES ('Megumi'); 
 INSERT INTO desk_user (username) VALUES ('Serena');
 INSERT INTO desk_user (username) VALUES ('Ali');
-INSERT INTO desk (desk_name) VALUES ('desk 1');
-INSERT INTO desk (desk_name) VALUES ('desk 2');
-INSERT INTO desk (desk_name) VALUES ('desk 3');
-INSERT INTO desk (desk_name) VALUES ('desk 4');
-INSERT INTO desk (desk_name) VALUES ('desk 5');
-INSERT INTO desk (desk_name) VALUES ('desk 6');
+
+INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 1',0,0,0);
+INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 2',175,0,180);
+INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 3',0,170,0);
+INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 4',175,170,180);
+INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 5',0,340,0);
+INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 6',175,340,180);
+];
+
 INSERT INTO booking (desk_user_id, booking_date) VALUES (1,'2022-01-17'); 
 INSERT INTO booking (desk_user_id, booking_date) VALUES (2,'2022-01-19');
 INSERT INTO booking (desk_user_id, booking_date) VALUES (1,'2022-01-19');
