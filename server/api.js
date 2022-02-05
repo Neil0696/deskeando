@@ -42,6 +42,16 @@ router.get("/bookings", async (req, res) => {
 	}
 });
 
+router.delete("/bookings/:id", async function (req, res) {
+	const deleteQuery = "DELETE FROM booking WHERE id=$1";
+	try {
+		const deletedBooking = await db.query(deleteQuery, [req.params.id]);
+		res.send("Booking deleted!");
+	} catch (e) {
+		res.status(400).json({});
+	}
+});
+
 router.post("/bookings", async function (req, res) {
 	const userName = req.body.name;
 	const deskId = req.body.desk_id;
