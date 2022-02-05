@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
+import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 
 import "./WeeklyTable.css";
 // const DEFAULT_MONDAY = new Date(2022, 0, 17);
@@ -67,6 +68,10 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 		return availableDesks + "/" + maxDesksForDay + " desks available";
 	}
 };
+
+// const getVisibleDeleteButton = () => {
+// 	if()
+// }
 
 const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 	const [currentMonday, setCurrentMonday] = useState(new Date(2022, 0, 17));
@@ -141,7 +146,17 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 						<tr key={i}>
 							<td></td>
 							{row.map((booking, index) => (
-								<td key={index}>{booking?.name}</td>
+								<td key={index} className="visible-on-hover">
+									{booking?.name}
+									{booking?.name && (
+										<span className="hide">
+											<ModalCancelBookingScreen
+												booking={booking}
+												refreshBooking={refreshBooking}
+											/>
+										</span>
+									)}
+								</td>
 							))}
 						</tr>
 					))}
@@ -149,7 +164,17 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 						<tr key={desk.name}>
 							<td>{desk.name}</td>
 							{bookingsByDesk[desk.name].map((booking, index) => (
-								<td key={index}>{booking?.name}</td>
+								<td key={index} className="visible-on-hover">
+									{booking?.name}
+									{booking?.name && (
+										<span className="hide">
+											<ModalCancelBookingScreen
+												booking={booking}
+												refreshBooking={refreshBooking}
+											/>
+										</span>
+									)}
+								</td>
 							))}
 						</tr>
 					))}
