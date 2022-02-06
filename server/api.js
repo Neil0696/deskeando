@@ -1,5 +1,10 @@
 import { Router } from "express";
 import db from "./db";
+import moment from "moment";
+
+export const formatBookingDate = (d) => {
+	return moment(d).format("ddd MMM Do");
+};
 
 const router = new Router();
 
@@ -76,14 +81,16 @@ router.post("/bookings", async function(req, res) {
 
 		if (bookingsByDayResult.rows.length >= 5) {
 			return res.status(400).send({
-				message: `No desks available for ${bookingDate}`,
+				message: `No desks available for ${formatBookingDate(bookingDate)}`,
 				field: "date",
 			});
 		}
 
-		if (deskId) {
-			const test = bookingsByDayResult.rows.find((e) => e.desk_id === deskId);
-			if (test) {
+		if (deskId !== undefined) {
+			const isDeskIdAlreadyTaken = bookingsByDayResult.rows.find(
+				(e) => e.desk_id === deskId
+			);
+			if (isDeskIdAlreadyTaken) {
 				return res.status(400).send({
 					message: `Desk ${deskId} is already taken`,
 					field: "desk",
