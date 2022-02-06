@@ -1,5 +1,10 @@
 import { Router } from "express";
 import db from "./db";
+import moment from "moment";
+
+export const formatBookingDate = (d) => {
+	return moment(d).format("ddd MMM Do");
+};
 
 const router = new Router();
 
@@ -42,7 +47,7 @@ router.get("/bookings", async (req, res) => {
 	}
 });
 
-router.post("/bookings", async function (req, res) {
+router.post("/bookings", async function(req, res) {
 	const userName = req.body.name;
 	const deskId = req.body.desk_id;
 	//const deskName = req.body.desk;
@@ -55,18 +60,39 @@ router.post("/bookings", async function (req, res) {
 			"SELECT id from desk_user WHERE username=$1",
 			[userName]
 		);
-		// const tableResult = await db.query(
-		// 	"SELECT id from desk WHERE desk_table_name=$2",
-		// 	[deskName]
-		// );
+
 		if (userResult.rows.length === 0) {
 			return res.status(400).send({
 				message: `User with name ${userName} does not exist`,
 				field: "name",
 			});
 		}
+
+		const bookingsByDayResult = await db.query(
+			"select * from booking where booking_date = $1",
+			[bookingDate]
+		);
+
+		if (bookingsByDayResult.rows.length >= 5) {
+			return res.status(400).send({
+				message: `No desks available for ${formatBookingDate(bookingDate)}`,
+				field: "date",
+			});
+		}
+
+		if (deskId !== undefined) {
+			const isDeskIdAlreadyTaken = bookingsByDayResult.rows.find(
+				(e) => e.desk_id === deskId
+			);
+			if (isDeskIdAlreadyTaken) {
+				return res.status(400).send({
+					message: `Desk ${deskId} is already taken`,
+					field: "desk",
+				});
+			}
+		}
+
 		const userId = userResult.rows[0].id;
-		//const deskId = tableResult.rows[0].id;
 		const bookingResult = await db.query(insertQuery, [
 			userId,
 			deskId,

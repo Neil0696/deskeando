@@ -24,6 +24,8 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 	const [deskId, setDeskId] = useState(null);
 	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
 	const [nameErrorMessage, setNameErrorMessage] = useState(null);
+	const [dateErrorMessage, setDateErrorMessage] = useState(null);
+	const [deskErrorMessage, setDeskErrorMessage] = useState(null);
 
 	const deskSelection = desks.map((desk) => ({
 		key: desk.id,
@@ -63,6 +65,10 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 						return response.json().then((error) => {
 							if (error.field === "name") {
 								setNameErrorMessage(error.message);
+							} else if (error.field === "date") {
+								setDateErrorMessage(error.message);
+							} else if (error.field === "desk") {
+								setDeskErrorMessage(error.message);
 							} else {
 								throw new Error("Booking not created, unexpected error");
 							}
@@ -115,6 +121,12 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 							<label>Date: </label>
 
 							<Form.Input
+								error={
+									dateErrorMessage && {
+										content: dateErrorMessage,
+										pointing: "below",
+									}
+								}
 								placeholder="Date"
 								type="text"
 								value={formatBookingDate(bookingDate)}
@@ -129,9 +141,13 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 									checked={dontSelectDesk}
 								/>
 							</Form.Field>
+							{deskErrorMessage && (
+								<p style={{ color: "maroon" }}>{deskErrorMessage}</p>
+							)}
 							{!dontSelectDesk && (
 								<div>
 									<Dropdown
+										error={!!deskErrorMessage}
 										placeholder="Desk Selection"
 										options={deskSelection}
 										selection
@@ -151,7 +167,11 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 					<Button
 						color="black"
 						onClick={() => {
-							setBookingErrorMessage(false);
+							setDateErrorMessage(null);
+							setBookingErrorMessage(null);
+							setNameErrorMessage(null);
+							setDeskErrorMessage(null);
+							setName(null);
 							setOpen(false);
 						}}
 					>
