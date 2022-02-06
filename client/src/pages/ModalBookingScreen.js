@@ -1,9 +1,6 @@
-import React from "react";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { formatBookingDate } from "../util";
 import FloorPlan from "./FloorPlan";
-
 import {
 	Icon,
 	Form,
