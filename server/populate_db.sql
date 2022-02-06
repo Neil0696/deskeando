@@ -12,7 +12,7 @@ INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 3',0,170,0);
 INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 4',175,170,180);
 INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 5',0,340,0);
 INSERT INTO desk (desk_name,x,y,r) VALUES ('desk 6',175,340,180);
-];
+
 
 INSERT INTO booking (desk_user_id, booking_date) VALUES (1,'2022-01-17'); 
 INSERT INTO booking (desk_user_id, booking_date) VALUES (2,'2022-01-19');
