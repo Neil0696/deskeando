@@ -44,7 +44,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 
 		setBookingErrorMessage(null);
 
-		if (name === "") {
+		if (!name) {
 			setNameErrorMessage("Please enter your name");
 		} else {
 			let newBooking = {
@@ -66,6 +66,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 					if (response.status >= 200 && response.status <= 299) {
 						setOpen(false);
 						refreshBooking();
+						setName(null);
 					} else {
 						// return so the error is caught by catch
 						return response.json().then((error) => {
@@ -107,8 +108,10 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 					<Form error={!!deskErrorMessage || !!nameErrorMessage}>
 						<Segment>
 							<Form.Field>
+								<label>Name: </label>
+
 								<Dropdown
-									label="Name"
+									onSearchChange={() => setName(null)}
 									error={!!nameErrorMessage}
 									placeholder="Select your name"
 									options={testUser}
@@ -120,41 +123,6 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 										setName(data.value);
 									}}
 								/>
-
-								{/* {nameErrorMessage && (
-										<Message error content={nameErrorMessage} />
-										// <p style={{ color: "maroon" }}>{nameErrorMessage}</p>
-									)} */}
-								{/* <Dropdown
-										error={!!nameErrorMessage}
-										placeholder="Select your name"
-										label="name"
-										options={testUser}
-										selection
-										search
-										value={name}
-										fluid
-										text={name}
-										onChange={(e, user) => {
-											setName(e.target.value);
-											setNameErrorMessage(null);
-										}}
-									/> */}
-
-								{/* <Form.Input
-									error={
-										nameErrorMessage && {
-											content: nameErrorMessage,
-											pointing: "below",
-										}
-									}
-									placeholder="Name"
-									label="Name"
-									onChange={(event) => {
-										setName(event.target.value);
-										setNameErrorMessage(null);
-									}}
-								/> */}
 							</Form.Field>
 							<Divider inverted />
 
@@ -170,7 +138,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 								placeholder="Date"
 								type="text"
 								value={formatBookingDate(bookingDate)}
-								disabled
+								readOnly
 							/>
 						</Segment>
 						<Segment>
@@ -181,15 +149,13 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 									checked={dontSelectDesk}
 								/>
 							</Form.Field>
-							{/* {deskErrorMessage && (
-								<Message
-									error
-									style={{ color: "maroon" }}
-									content={deskErrorMessage}
-								/>
-							)} */}
-							{/* {!dontSelectDesk && (
-								<div>
+							{!dontSelectDesk && (
+								<Form.Field>
+									<Message
+										error
+										content={deskErrorMessage}
+										style={{ width: "200px" }}
+									/>
 									<Dropdown
 										error={!!deskErrorMessage}
 										placeholder="Desk Selection"
@@ -197,34 +163,14 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 										selection
 										value={deskId}
 										onChange={(e, data) => {
-											setDeskId(data.value);
 											setDeskErrorMessage(null);
+											setDeskId(data.value);
 										}}
 									/>
 									<br />
 									<FloorPlan desks={desks} />
-								</div>
-							)} */}
-							<Form.Field>
-								<Message
-									error
-									content={deskErrorMessage}
-									// style={{ width: "200px" }}
-								/>
-								<Dropdown
-									error={!!deskErrorMessage}
-									placeholder="Desk Selection"
-									options={deskSelection}
-									selection
-									value={deskId}
-									onChange={(e, data) => {
-										setDeskErrorMessage(null);
-										setDeskId(data.value);
-									}}
-								/>
-								<br />
-								<FloorPlan desks={desks} />
-							</Form.Field>
+								</Form.Field>
+							)}
 						</Segment>
 					</Form>
 				</Modal.Description>
