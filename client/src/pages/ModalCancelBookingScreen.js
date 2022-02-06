@@ -14,8 +14,12 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 				"content-type": "application/jason",
 			},
 		}).then((response) => {
-			setOpen(false);
-			refreshBooking();
+			if (response.status >= 200 && response.status <= 299) {
+				setOpen(false);
+				refreshBooking();
+			} else {
+				throw new Error("Unexpected error");
+			}
 		});
 	};
 
@@ -33,9 +37,10 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 			<Modal.Content>
 				<Modal.Description>
 					<Segment>
+						<p>Dear {booking.name},</p>
 						<p>
 							Are you sure you want delete your booking for{" "}
-							{formatBookingDate(booking.date)}?
+							"{formatBookingDate(booking.date)}"?
 						</p>
 					</Segment>
 				</Modal.Description>
