@@ -104,28 +104,43 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 							content={bookingErrorMessage}
 						/>
 					)}
-					<Form>
+					<Form error={!!deskErrorMessage || !!nameErrorMessage}>
 						<Segment>
 							<Form.Field>
-								{nameErrorMessage && (
-									<Message error content={nameErrorMessage} />
-									// <p style={{ color: "maroon" }}>{nameErrorMessage}</p>
-								)}
 								<Dropdown
+									label="Name"
 									error={!!nameErrorMessage}
 									placeholder="Select your name"
-									label="name"
 									options={testUser}
 									selection
 									search
 									value={name}
-									fluid
-									text={name}
-									onChange={(e, user) => {
-										setName(e.target.value);
+									onChange={(e, data) => {
 										setNameErrorMessage(null);
+										setName(data.value);
 									}}
 								/>
+
+								{/* {nameErrorMessage && (
+										<Message error content={nameErrorMessage} />
+										// <p style={{ color: "maroon" }}>{nameErrorMessage}</p>
+									)} */}
+								{/* <Dropdown
+										error={!!nameErrorMessage}
+										placeholder="Select your name"
+										label="name"
+										options={testUser}
+										selection
+										search
+										value={name}
+										fluid
+										text={name}
+										onChange={(e, user) => {
+											setName(e.target.value);
+											setNameErrorMessage(null);
+										}}
+									/> */}
+
 								{/* <Form.Input
 									error={
 										nameErrorMessage && {
@@ -166,10 +181,14 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 									checked={dontSelectDesk}
 								/>
 							</Form.Field>
-							{deskErrorMessage && (
-								<p style={{ color: "maroon" }}>{deskErrorMessage}</p>
-							)}
-							{!dontSelectDesk && (
+							{/* {deskErrorMessage && (
+								<Message
+									error
+									style={{ color: "maroon" }}
+									content={deskErrorMessage}
+								/>
+							)} */}
+							{/* {!dontSelectDesk && (
 								<div>
 									<Dropdown
 										error={!!deskErrorMessage}
@@ -177,12 +196,35 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 										options={deskSelection}
 										selection
 										value={deskId}
-										onChange={(e, data) => setDeskId(data.value)}
+										onChange={(e, data) => {
+											setDeskId(data.value);
+											setDeskErrorMessage(null);
+										}}
 									/>
 									<br />
 									<FloorPlan desks={desks} />
 								</div>
-							)}
+							)} */}
+							<Form.Field>
+								<Message
+									error
+									content={deskErrorMessage}
+									// style={{ width: "200px" }}
+								/>
+								<Dropdown
+									error={!!deskErrorMessage}
+									placeholder="Desk Selection"
+									options={deskSelection}
+									selection
+									value={deskId}
+									onChange={(e, data) => {
+										setDeskErrorMessage(null);
+										setDeskId(data.value);
+									}}
+								/>
+								<br />
+								<FloorPlan desks={desks} />
+							</Form.Field>
 						</Segment>
 					</Form>
 				</Modal.Description>
