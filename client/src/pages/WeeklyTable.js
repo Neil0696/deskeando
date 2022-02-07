@@ -1,19 +1,19 @@
 import React from "react";
 import { useState } from "react";
-
+import moment from "moment";
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 
 import "./WeeklyTable.css";
 // const DEFAULT_MONDAY = new Date(2022, 0, 17);
 
-const week = [
-	"2022-01-17T00:00:00.000Z",
-	"2022-01-18T00:00:00.000Z",
-	"2022-01-19T00:00:00.000Z",
-	"2022-01-20T00:00:00.000Z",
-	"2022-01-21T00:00:00.000Z",
-];
+// const week = [
+// 	"2022-01-17T00:00:00.000Z",
+// 	"2022-01-18T00:00:00.000Z",
+// 	"2022-01-19T00:00:00.000Z",
+// 	"2022-01-20T00:00:00.000Z",
+// 	"2022-01-21T00:00:00.000Z",
+// ];
 
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
@@ -69,7 +69,8 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 };
 
 const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
-	const [currentMonday, setCurrentMonday] = useState(new Date(2022, 0, 17));
+	const startOfTheWeekDate = moment().startOf("isoWeek").toDate() 
+	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
 	let week = [];
 	const year = currentMonday.getFullYear();
@@ -83,9 +84,12 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 
 	const bookingsByRow = getBookingsByRow(bookings, week);
 	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
-	// function setThisMonday() {
 
-	// }
+	function setThisMonday() {
+		setCurrentMonday(startOfTheWeekDate) ;
+		
+	}
+
 	function setNextMonday() {
 		setCurrentMonday((currentMonday) => {
 			return new Date(
@@ -109,7 +113,9 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 		<div>
 			<div>
 				{/* <tr> */}
-				<span>This Week</span>
+				<button className={"inner"} onClick={setThisMonday}>
+					This week
+				</button>
 				<button className={"inner"} onClick={setPreviousMonday}>
 					Previous week
 				</button>
