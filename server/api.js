@@ -8,21 +8,29 @@ export const formatBookingDate = (d) => {
 
 const router = new Router();
 
-const desks = [
-	{ id: 1, name: "desk 1", x: 0, y: 0, r: 0 },
-	{ id: 2, name: "desk 2", x: 175, y: 0, r: 180 },
-	{ id: 3, name: "desk 3", x: 0, y: 170, r: 0 },
-	{ id: 4, name: "desk 4", x: 175, y: 170, r: 180 },
-	{ id: 5, name: "desk 5", x: 0, y: 340, r: 0 },
-	{ id: 6, name: "desk 6", x: 175, y: 340, r: 180 },
-];
-
 router.get("/", (req, res) => {
 	res.json({ message: "Hello, world!" });
 });
 
-router.get("/desks", (req, res) => {
-	res.json(desks);
+router.get("/desks", async (req, res) => {
+	try {
+		const deskResult = await db.query("SELECT * from desk;");
+		// convert array with objects having {username, booking_date} into {name,desk_id,desk,date}
+
+		const desks = deskResult.rows.map((row) => {
+			return {
+				id: row.id,
+				name: row.desk_name,
+				x: row.x,
+				y: row.y,
+				r: row.r,
+			};
+		});
+		res.json(desks);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
 
 router.get("/bookings", async (req, res) => {
