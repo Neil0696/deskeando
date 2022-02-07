@@ -5,15 +5,6 @@ import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 
 import "./WeeklyTable.css";
-// const DEFAULT_MONDAY = new Date(2022, 0, 17);
-
-// const week = [
-// 	"2022-01-17T00:00:00.000Z",
-// 	"2022-01-18T00:00:00.000Z",
-// 	"2022-01-19T00:00:00.000Z",
-// 	"2022-01-20T00:00:00.000Z",
-// 	"2022-01-21T00:00:00.000Z",
-// ];
 
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
@@ -112,7 +103,6 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 	return (
 		<div>
 			<div>
-				{/* <tr> */}
 				<button className={"inner"} onClick={setThisMonday}>
 					This week
 				</button>
@@ -122,7 +112,6 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 				<button className={"inner"} onClick={setNextMonday}>
 					Next Week
 				</button>
-				{/* </tr> */}
 			</div>
 			<table>
 				<thead>
