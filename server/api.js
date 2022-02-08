@@ -90,7 +90,7 @@ router.post("/bookings", async function(req, res) {
 			});
 		}
 
-		if (deskId !== undefined) {
+		if (deskId) {
 			const isDeskIdAlreadyTaken = bookingsByDayResult.rows.find(
 				(e) => e.desk_id === deskId
 			);

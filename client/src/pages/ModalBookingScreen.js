@@ -67,6 +67,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 						setOpen(false);
 						refreshBooking();
 						setName(null);
+						setDeskId(null);
 					} else {
 						// return so the error is caught by catch
 						return response.json().then((error) => {
