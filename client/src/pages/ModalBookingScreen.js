@@ -19,7 +19,7 @@ import {
 
 function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 	const [open, setOpen] = React.useState(false);
-	const [name, setName] = useState("");
+	const [name, setName] = useState(null);
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
 	const [deskId, setDeskId] = useState(null);
 	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
@@ -33,7 +33,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 		value: desk.id,
 	}));
 
-	const testUser = users.map((e) => ({
+	const userOptions = users.map((e) => ({
 		key: e.id,
 		text: e.username,
 		value: e.username,
@@ -109,12 +109,11 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 						<Segment>
 							<Form.Field>
 								<label>Name: </label>
-
 								<Dropdown
 									onSearchChange={() => setName(null)}
 									error={!!nameErrorMessage}
 									placeholder="Select your name"
-									options={testUser}
+									options={userOptions}
 									selection
 									search
 									value={name}
@@ -125,9 +124,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 								/>
 							</Form.Field>
 							<Divider inverted />
-
 							<label>Date: </label>
-
 							<Form.Input
 								error={
 									dateErrorMessage && {
@@ -186,6 +183,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 							setDeskErrorMessage(null);
 							setName(null);
 							setOpen(false);
+							setDeskId(null);
 						}}
 					>
 						Cancel

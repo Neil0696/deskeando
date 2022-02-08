@@ -73,7 +73,7 @@ router.post("/bookings", async function(req, res) {
 
 		if (userResult.rows.length === 0) {
 			return res.status(400).send({
-				message: `User with the name ${userName} does not exist`,
+				message: `${userName} does not exist`,
 				field: "name",
 			});
 		}
