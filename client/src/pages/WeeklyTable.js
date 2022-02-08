@@ -41,7 +41,7 @@ const getBookingsByDesk = (bookings, week, desks) => {
 		);
 	});
 
-	return bookingsByDesk;
+	return{ bookingsByDesk, bookingsByDayWithDesk };
 };
 
 const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
@@ -80,7 +80,7 @@ const WeeklyTable = ({
 	}
 
 	const bookingsByRow = getBookingsByRow(bookings, week);
-	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
+	const {bookingsByDesk, bookingsByDayWithDesk} = getBookingsByDesk(bookings, week, desks);
 
 	function setThisMonday() {
 		setCurrentMonday(startOfTheWeekDate);
@@ -130,6 +130,7 @@ const WeeklyTable = ({
 									refreshBooking={refreshBooking}
 									desks={desks}
 									users={users}
+									bookingsByDate={bookingsByDayWithDesk[date]}
 								/>
 								<br />
 								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}

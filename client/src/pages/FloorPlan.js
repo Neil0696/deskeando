@@ -1,6 +1,6 @@
 import React from "react";
 
-const Desk = ({ desk }) => {
+const Desk = ({ desk, bookingForThisDesk }) => {
 	return (
 		<>
 			<g transform={`rotate(${desk.r} 75 75)`}>
@@ -22,11 +22,19 @@ const Desk = ({ desk }) => {
 			<text fontSize={40} x={64} y={90}>
 				{desk.id}
 			</text>
+			<text fontSize={25} x={20} y={140}>
+				{bookingForThisDesk?.name}
+			</text>
 		</>
 	);
 };
 
-const FloorPlan = ({ desks }) => {
+const FloorPlan = ({ desks, bookingsByDate }) => {
+	const bookingsByDesk = {};
+	bookingsByDate.forEach((booking) => {
+		bookingsByDesk[booking.desk_id] = booking;
+	});
+	
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -44,11 +52,11 @@ const FloorPlan = ({ desks }) => {
 			/>
 			<g id="Group1" transform="translate(262 100)">
 				{desks.map((desk, i) => (
-					<g
-						key={i}
-						transform={`translate(${desk.x} ${desk.y})`}
-					>
-						<Desk desk={desk} />
+					<g key={i} transform={`translate(${desk.x} ${desk.y})`}>
+						<Desk
+							desk={desk}
+							bookingForThisDesk={bookingsByDesk[desk.id]}
+						/>
 					</g>
 				))}
 			</g>
