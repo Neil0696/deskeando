@@ -25,10 +25,14 @@ router.get("/desks", (req, res) => {
 	res.json(desks);
 });
 
-router.get("/users", (req, res) => {
-	db.query("SELECT * FROM desk_user", (error, result) => {
-		res.json(result.rows);
-	});
+router.get("/users", async (req, res) => {
+	try {
+		const queryResult = await db.query("SELECT * FROM desk_user");
+		res.json(queryResult.rows);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
 });
 
 router.get("/bookings", async (req, res) => {
