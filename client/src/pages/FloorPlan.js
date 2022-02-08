@@ -6,7 +6,7 @@ const Desk = ({ desk, bookingForThisDesk }) => {
 			<g transform={`rotate(${desk.r} 75 75)`}>
 				<rect
 					style={{
-						fill: "#3F94D5",
+						fill: bookingForThisDesk?"red":"green",
 						stroke: "#000000",
 						strokeWidth: "1",
 						fillOpacity: 0.6,
