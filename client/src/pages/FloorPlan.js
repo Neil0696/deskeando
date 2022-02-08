@@ -6,7 +6,7 @@ const Desk = ({ desk, bookingForThisDesk }) => {
 			<g transform={`rotate(${desk.r} 75 75)`}>
 				<rect
 					style={{
-						fill: bookingForThisDesk?"red":"green",
+						fill: bookingForThisDesk ? "red" : "green",
 						stroke: "#000000",
 						strokeWidth: "1",
 						fillOpacity: 0.6,
@@ -34,7 +34,7 @@ const FloorPlan = ({ desks, bookingsByDate }) => {
 	bookingsByDate.forEach((booking) => {
 		bookingsByDesk[booking.desk_id] = booking;
 	});
-	
+
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
@@ -53,10 +53,7 @@ const FloorPlan = ({ desks, bookingsByDate }) => {
 			<g id="Group1" transform="translate(262 100)">
 				{desks.map((desk, i) => (
 					<g key={i} transform={`translate(${desk.x} ${desk.y})`}>
-						<Desk
-							desk={desk}
-							bookingForThisDesk={bookingsByDesk[desk.id]}
-						/>
+						<Desk desk={desk} bookingForThisDesk={bookingsByDesk[desk.id]} />
 					</g>
 				))}
 			</g>
