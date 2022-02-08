@@ -1,9 +1,8 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
-
+import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 import "./WeeklyTable.css";
 
 const getBookingsByRow = (bookings, week) => {
@@ -59,8 +58,12 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	}
 };
 
+// const getVisibleDeleteButton = () => {
+// 	if()
+// }
+
 const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
-	const startOfTheWeekDate = moment().startOf("isoWeek").toDate() 
+	const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
 	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
 	let week = [];
@@ -77,8 +80,7 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
 
 	function setThisMonday() {
-		setCurrentMonday(startOfTheWeekDate) ;
-		
+		setCurrentMonday(startOfTheWeekDate);
 	}
 
 	function setNextMonday() {
@@ -136,7 +138,17 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 						<tr key={i}>
 							<td></td>
 							{row.map((booking, index) => (
-								<td key={index}>{booking?.name}</td>
+								<td key={index} className="visible-on-hover">
+									{booking?.name}
+									{booking?.name && (
+										<span className="hide">
+											<ModalCancelBookingScreen
+												booking={booking}
+												refreshBooking={refreshBooking}
+											/>
+										</span>
+									)}
+								</td>
 							))}
 						</tr>
 					))}
@@ -144,7 +156,17 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 						<tr key={desk.name}>
 							<td>{desk.name}</td>
 							{bookingsByDesk[desk.name].map((booking, index) => (
-								<td key={index}>{booking?.name}</td>
+								<td key={index} className="visible-on-hover">
+									{booking?.name}
+									{booking?.name && (
+										<span className="hide">
+											<ModalCancelBookingScreen
+												booking={booking}
+												refreshBooking={refreshBooking}
+											/>
+										</span>
+									)}
+								</td>
 							))}
 						</tr>
 					))}
