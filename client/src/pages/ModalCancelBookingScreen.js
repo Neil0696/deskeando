@@ -11,7 +11,7 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 		fetch(`/api/bookings/${booking.id}`, {
 			method: "DELETE",
 			headers: {
-				"content-type": "application/jason",
+				"content-type": "application/json",
 			},
 		}).then((response) => {
 			if (response.status >= 200 && response.status <= 299) {
