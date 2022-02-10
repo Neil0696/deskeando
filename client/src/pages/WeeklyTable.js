@@ -45,9 +45,8 @@ const getBookingsByDesk = (bookings, week, desks) => {
 };
 
 const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
-	const countBookingsByDay = bookings.filter(
-		(booking) => booking.date === date
-	).length;
+	const countBookingsByDay = bookings.filter((booking) => booking.date === date)
+		.length;
 
 	const availableDesks = maxDesksForDay - countBookingsByDay;
 
@@ -58,12 +57,16 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	}
 };
 
-// const getVisibleDeleteButton = () => {
-// 	if()
-// }
-
-const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
-	const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
+const WeeklyTable = ({
+	bookings,
+	desks,
+	refreshBooking,
+	maxDesksForDay,
+	users,
+}) => {
+	const startOfTheWeekDate = moment()
+		.startOf("isoWeek")
+		.toDate();
 	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
 	let week = [];
@@ -126,6 +129,7 @@ const WeeklyTable = ({ bookings, desks, refreshBooking, maxDesksForDay }) => {
 									bookingDate={date}
 									refreshBooking={refreshBooking}
 									desks={desks}
+									users={users}
 								/>
 								<br />
 								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}

@@ -9,6 +9,7 @@ export function Home() {
 	const [bookings, setBookings] = useState([]);
 	const [desks, setDesks] = useState([]);
 	const [refreshKey, setRefreshKey] = useState(0);
+	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
 		fetch("/api/bookings")
@@ -21,6 +22,13 @@ export function Home() {
 		fetch("/api/desks")
 			.then((response) => response.json())
 			.then(setDesks)
+			.catch((err) => console.log(err));
+	}, []);
+
+	useEffect(() => {
+		fetch("/api/users")
+			.then((response) => response.json())
+			.then(setUsers)
 			.catch((err) => console.log(err));
 	}, []);
 
@@ -45,6 +53,7 @@ export function Home() {
 				desks={desks}
 				refreshBooking={refreshBooking}
 				maxDesksForDay={MAX_DESKS_FOR_DAY}
+				users={users}
 			/>
 		</main>
 	);

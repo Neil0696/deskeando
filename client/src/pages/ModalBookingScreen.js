@@ -14,9 +14,9 @@ import {
 	Dropdown,
 } from "semantic-ui-react";
 
-function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
+function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 	const [open, setOpen] = React.useState(false);
-	const [name, setName] = useState("");
+	const [name, setName] = useState(null);
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
 	const [deskId, setDeskId] = useState(null);
 	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
@@ -30,12 +30,18 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 		value: desk.id,
 	}));
 
+	const userOptions = users.map((e) => ({
+		key: e.id,
+		text: e.username,
+		value: e.username,
+	}));
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
 		setBookingErrorMessage(null);
 
-		if (name === "") {
+		if (!name) {
 			setNameErrorMessage("Please enter your name");
 		} else {
 			let newBooking = {
@@ -57,6 +63,8 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 					if (response.status >= 200 && response.status <= 299) {
 						setOpen(false);
 						refreshBooking();
+						setName(null);
+						setDeskId(null);
 					} else {
 						const error = await response.json();
 						if (error.field === "name") {
@@ -93,28 +101,26 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 							content={bookingErrorMessage}
 						/>
 					)}
-					<Form>
+					<Form error={!!deskErrorMessage || !!nameErrorMessage}>
 						<Segment>
 							<Form.Field>
-								<Form.Input
-									error={
-										nameErrorMessage && {
-											content: nameErrorMessage,
-											pointing: "below",
-										}
-									}
-									placeholder="Name"
-									label="Name"
-									onChange={(event) => {
-										setName(event.target.value);
+								<label>Name: </label>
+								<Dropdown
+									onSearchChange={() => setName(null)}
+									error={!!nameErrorMessage}
+									placeholder="Select your name"
+									options={userOptions}
+									selection
+									search
+									value={name}
+									onChange={(e, data) => {
 										setNameErrorMessage(null);
+										setName(data.value);
 									}}
 								/>
 							</Form.Field>
 							<Divider inverted />
-
 							<label>Date: </label>
-
 							<Form.Input
 								error={
 									dateErrorMessage && {
@@ -125,7 +131,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 								placeholder="Date"
 								type="text"
 								value={formatBookingDate(bookingDate)}
-								disabled
+								readOnly
 							/>
 						</Segment>
 						<Segment>
@@ -136,22 +142,27 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 									checked={dontSelectDesk}
 								/>
 							</Form.Field>
-							{deskErrorMessage && (
-								<p style={{ color: "maroon" }}>{deskErrorMessage}</p>
-							)}
 							{!dontSelectDesk && (
-								<div>
+								<Form.Field>
+									<Message
+										error
+										content={deskErrorMessage}
+										style={{ width: "200px" }}
+									/>
 									<Dropdown
 										error={!!deskErrorMessage}
 										placeholder="Desk Selection"
 										options={deskSelection}
 										selection
 										value={deskId}
-										onChange={(e, data) => setDeskId(data.value)}
+										onChange={(e, data) => {
+											setDeskErrorMessage(null);
+											setDeskId(data.value);
+										}}
 									/>
 									<br />
 									<FloorPlan desks={desks} />
-								</div>
+								</Form.Field>
 							)}
 						</Segment>
 					</Form>
@@ -168,6 +179,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks }) {
 							setDeskErrorMessage(null);
 							setName(null);
 							setOpen(false);
+							setDeskId(null);
 						}}
 					>
 						Cancel

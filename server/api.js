@@ -33,6 +33,16 @@ router.get("/desks", async (req, res) => {
 	}
 });
 
+router.get("/users", async (req, res) => {
+	try {
+		const queryResult = await db.query("SELECT * FROM desk_user");
+		res.json(queryResult.rows);
+	} catch (e) {
+		console.error(e);
+		res.sendStatus(400);
+	}
+});
+
 router.get("/bookings", async (req, res) => {
 	try {
 		const result = await db.query(
@@ -81,7 +91,7 @@ router.post("/bookings", async function (req, res) {
 
 		if (userResult.rows.length === 0) {
 			return res.status(400).send({
-				message: `User with name ${userName} does not exist`,
+				message: `${userName} does not exist`,
 				field: "name",
 			});
 		}
@@ -98,7 +108,7 @@ router.post("/bookings", async function (req, res) {
 			});
 		}
 
-		if (deskId !== undefined) {
+		if (deskId) {
 			const isDeskIdAlreadyTaken = bookingsByDayResult.rows.find(
 				(e) => e.desk_id === deskId
 			);
