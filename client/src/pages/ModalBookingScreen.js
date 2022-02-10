@@ -12,6 +12,7 @@ import {
 	Modal,
 	Message,
 	Dropdown,
+	Grid,
 } from "semantic-ui-react";
 
 function ModalBookingScreen({
@@ -100,78 +101,77 @@ function ModalBookingScreen({
 			<Header as="h2" content="Book Your Desk" />
 			<Modal.Content scrolling>
 				<Modal.Description>
-					{bookingErrorMessage && (
-						<Message
-							error
-							header="An error occurred"
-							content={bookingErrorMessage}
-						/>
-					)}
-					<Form error={!!deskErrorMessage || !!nameErrorMessage}>
-						<Segment>
-							<Form.Field>
-								<label>Name: </label>
-								<Dropdown
-									onSearchChange={() => setName(null)}
-									error={!!nameErrorMessage}
-									placeholder="Select your name"
-									options={userOptions}
-									selection
-									search
-									value={name}
-									onChange={(e, data) => {
-										setNameErrorMessage(null);
-										setName(data.value);
-									}}
+					<Grid columns={2} relaxed="very" stackable>
+						<Grid.Column>
+							{bookingErrorMessage && (
+								<Message
+									error
+									header="An error occurred"
+									content={bookingErrorMessage}
 								/>
-							</Form.Field>
-							<Divider inverted />
-							<label>Date: </label>
-							<Form.Input
-								error={
-									dateErrorMessage && {
-										content: dateErrorMessage,
-										pointing: "below",
-									}
-								}
-								placeholder="Date"
-								type="text"
-								value={formatBookingDate(bookingDate)}
-								readOnly
-							/>
-						</Segment>
-						<Segment>
-							<Form.Field>
-								<Checkbox
-									label="I don't care where I sit"
-									onChange={(e, data) => setDontSelectDesk(data.checked)}
-									checked={dontSelectDesk}
-								/>
-							</Form.Field>
-							{!dontSelectDesk && (
-								<Form.Field>
-									<Message
-										error
-										content={deskErrorMessage}
-										style={{ width: "200px" }}
+							)}
+							<Form error={!!deskErrorMessage || !!nameErrorMessage}>
+								<Segment>
+									<Form.Field>
+										<Dropdown
+											onSearchChange={() => setName(null)}
+											error={!!nameErrorMessage}
+											placeholder="Select your name"
+											options={userOptions}
+											selection
+											search
+											value={name}
+											onChange={(e, data) => {
+												setNameErrorMessage(null);
+												setName(data.value);
+											}}
+										/>
+									</Form.Field>
+									<Divider inverted />
+
+									<label>Date: </label>
+
+									<Form.Input
+										error={
+											dateErrorMessage && {
+												content: dateErrorMessage,
+												pointing: "below",
+											}
+										}
+										placeholder="Date"
+										type="text"
+										value={formatBookingDate(bookingDate)}
+										readOnly
 									/>
+								</Segment>
+								<Segment>
+									<Form.Field>
+										<Checkbox
+											label="I don't care where I sit"
+											onChange={(e, data) => setDontSelectDesk(data.checked)}
+											checked={dontSelectDesk}
+										/>
+									</Form.Field>
 									<Dropdown
-										error={!!deskErrorMessage}
-										placeholder="Desk Selection"
-										options={deskSelection}
+										onSearchChange={() => setName(null)}
+										error={!!nameErrorMessage}
+										placeholder="Select your name"
+										options={userOptions}
 										selection
-										value={deskId}
+										search
+										value={name}
 										onChange={(e, data) => {
-											setDeskErrorMessage(null);
-											setDeskId(data.value);
+											setNameErrorMessage(null);
+											setName(data.value);
 										}}
 									/>
-									<br />
-									<FloorPlan desks={desks} bookings={bookingsForDate} />
-								</Form.Field>
-							)}
-						</Segment>
-					</Form>
+								</Segment>
+							</Form>
+						</Grid.Column>
+						<Grid.Column>
+							<FloorPlan desks={desks} bookings={bookingsForDate} />
+						</Grid.Column>
+					</Grid>
 				</Modal.Description>
 			</Modal.Content>
 			<Modal.Actions>
