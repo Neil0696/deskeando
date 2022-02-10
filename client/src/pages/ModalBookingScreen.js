@@ -14,6 +14,7 @@ import {
 	Dropdown,
 	Grid,
 	Input,
+	Popup,
 } from "semantic-ui-react";
 
 function ModalBookingScreen({
@@ -114,6 +115,7 @@ function ModalBookingScreen({
 							<Form error={!!deskErrorMessage || !!nameErrorMessage}>
 								<Segment>
 									<Form.Field inline>
+										<Icon name="user" />
 										<Dropdown
 											onSearchChange={() => setName(null)}
 											error={!!nameErrorMessage}
@@ -130,6 +132,10 @@ function ModalBookingScreen({
 									</Form.Field>
 									<Divider inverted />
 									<Form.Field inline>
+										<Popup
+											content={formatBookingDate(bookingDate)}
+											trigger={<Icon name="calendar alternate outline" />}
+										/>
 										<Input
 											error={
 												dateErrorMessage && {
@@ -137,7 +143,6 @@ function ModalBookingScreen({
 													pointing: "below",
 												}
 											}
-											label="Date:"
 											placeholder="Date"
 											type="text"
 											value={formatBookingDate(bookingDate)}
