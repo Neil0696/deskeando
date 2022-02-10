@@ -158,22 +158,26 @@ function ModalBookingScreen({
 											checked={dontSelectDesk}
 										/>
 									</Form.Field>
-									<Message
-										error
-										content={deskErrorMessage}
-										style={{ width: "200px" }}
-									/>
-									<Dropdown
-										error={!!deskErrorMessage}
-										placeholder="Desk Selection"
-										options={deskSelection}
-										selection
-										value={deskId}
-										onChange={(e, data) => {
-											setDeskErrorMessage(null);
-											setDeskId(data.value);
-										}}
-									/>
+									{!dontSelectDesk && (
+										<Form.Field>
+											<Message
+												error
+												content={deskErrorMessage}
+												style={{ width: "200px" }}
+											/>
+											<Dropdown
+												error={!!deskErrorMessage}
+												placeholder="Desk Selection"
+												options={deskSelection}
+												selection
+												value={deskId}
+												onChange={(e, data) => {
+													setDeskErrorMessage(null);
+													setDeskId(data.value);
+												}}
+											/>
+										</Form.Field>
+									)}
 								</Segment>
 							</Form>
 						</Grid.Column>
