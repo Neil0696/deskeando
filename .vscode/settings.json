@@ -4,6 +4,6 @@
 		"source.fixAll.eslint": true
 	},
 	"files.eol": "\n",
-	"cSpell.ignoreWords": ["Deskeando","Adeola","Megumi","checkmark"]
+	"cSpell.ignoreWords": ["Deskeando","Adeola","Megumi","checkmark","stackable"]
 	
 }
