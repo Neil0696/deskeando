@@ -167,7 +167,12 @@ function ModalBookingScreen({
 										}}
 									/>
 									<br />
-									<FloorPlan desks={desks} bookings={bookingsForDate} />
+									<FloorPlan
+										desks={desks}
+										bookings={bookingsForDate}
+										deskId={deskId}
+										setDeskId={setDeskId}
+									/>
 								</Form.Field>
 							)}
 						</Segment>

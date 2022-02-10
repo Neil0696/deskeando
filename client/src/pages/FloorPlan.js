@@ -1,10 +1,21 @@
 import React from "react";
 import "./FloorPlan.css";
 
-const Desk = ({ desk, booking }) => {
-	const deskColor = `${booking ? "booked-desk" : "free-desk"}`;
+const Desk = ({ desk, booking, deskId, setDeskId }) => {
+	const deskColor = `${
+		booking ? "booked-desk" : deskId === desk.id ? "selected" : "free-desk"
+	}`;
 	return (
-		<>
+		<g
+			transform={`translate(${desk.x} ${desk.y})`}
+			onClick={() => {
+				if (!booking) {
+					if (deskId === desk.id) {
+						setDeskId(null);
+					} else setDeskId(desk.id);
+				}
+			}}
+		>
 			<g transform={`rotate(${desk.r} 75 75)`}>
 				<rect
 					className={deskColor}
@@ -22,11 +33,11 @@ const Desk = ({ desk, booking }) => {
 			<text fontSize={25} x={20} y={140}>
 				{booking?.name}
 			</text>
-		</>
+		</g>
 	);
 };
 
-const FloorPlan = ({ desks, bookings }) => {
+const FloorPlan = ({ desks, bookings, deskId, setDeskId }) => {
 	const bookingsByDesk = {};
 	bookings.forEach((booking) => {
 		bookingsByDesk[booking.desk_id] = booking;
@@ -49,9 +60,13 @@ const FloorPlan = ({ desks, bookings }) => {
 			/>
 			<g id="Group1" transform="translate(262 100)">
 				{desks.map((desk, i) => (
-					<g key={i} transform={`translate(${desk.x} ${desk.y})`}>
-						<Desk desk={desk} booking={bookingsByDesk[desk.id]} />
-					</g>
+					<Desk
+						key={i}
+						desk={desk}
+						booking={bookingsByDesk[desk.id]}
+						deskId={deskId}
+						setDeskId={setDeskId}
+					/>
 				))}
 			</g>
 		</svg>
