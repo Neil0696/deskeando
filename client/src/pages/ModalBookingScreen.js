@@ -13,6 +13,7 @@ import {
 	Message,
 	Dropdown,
 	Grid,
+	Input,
 } from "semantic-ui-react";
 
 function ModalBookingScreen({
@@ -98,11 +99,11 @@ function ModalBookingScreen({
 				<Icon link name="add" size="small" circular inverted color="teal" />
 			}
 		>
-			<Header as="h2" content="Book Your Desk" />
 			<Modal.Content scrolling>
 				<Modal.Description>
 					<Grid columns={2} relaxed="very" stackable>
 						<Grid.Column>
+							<Header as="h2" content="Book Your Desk" />
 							{bookingErrorMessage && (
 								<Message
 									error
@@ -112,7 +113,7 @@ function ModalBookingScreen({
 							)}
 							<Form error={!!deskErrorMessage || !!nameErrorMessage}>
 								<Segment>
-									<Form.Field>
+									<Form.Field inline>
 										<Dropdown
 											onSearchChange={() => setName(null)}
 											error={!!nameErrorMessage}
@@ -128,21 +129,21 @@ function ModalBookingScreen({
 										/>
 									</Form.Field>
 									<Divider inverted />
-
-									<label>Date: </label>
-
-									<Form.Input
-										error={
-											dateErrorMessage && {
-												content: dateErrorMessage,
-												pointing: "below",
+									<Form.Field inline>
+										<Input
+											error={
+												dateErrorMessage && {
+													content: dateErrorMessage,
+													pointing: "below",
+												}
 											}
-										}
-										placeholder="Date"
-										type="text"
-										value={formatBookingDate(bookingDate)}
-										readOnly
-									/>
+											label="Date:"
+											placeholder="Date"
+											type="text"
+											value={formatBookingDate(bookingDate)}
+											readonly
+										/>
+									</Form.Field>
 								</Segment>
 								<Segment>
 									<Form.Field>
