@@ -6,7 +6,10 @@ create table desk_user (id SERIAL PRIMARY KEY, username VARCHAR(200) not null);
 
 create table desk (
     id SERIAL PRIMARY KEY,
-    desk_name VARCHAR (100) not null
+    desk_name VARCHAR (100) not null,
+    x INT not null,
+    y INT not null,
+    r INT not null
 );
 
 create table booking (
@@ -15,5 +18,6 @@ create table booking (
     desk_id INT REFERENCES desk(id),
     booking_date DATE
 );
+
 
 

@@ -1,19 +1,9 @@
-import React from "react";
-import { useState } from "react";
-
+import React, { useState } from "react";
+import moment from "moment";
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
-
+import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 import "./WeeklyTable.css";
-// const DEFAULT_MONDAY = new Date(2022, 0, 17);
-
-const week = [
-	"2022-01-17T00:00:00.000Z",
-	"2022-01-18T00:00:00.000Z",
-	"2022-01-19T00:00:00.000Z",
-	"2022-01-20T00:00:00.000Z",
-	"2022-01-21T00:00:00.000Z",
-];
 
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
@@ -74,7 +64,10 @@ const WeeklyTable = ({
 	maxDesksForDay,
 	users,
 }) => {
-	const [currentMonday, setCurrentMonday] = useState(new Date(2022, 0, 17));
+	const startOfTheWeekDate = moment()
+		.startOf("isoWeek")
+		.toDate();
+	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
 	let week = [];
 	const year = currentMonday.getFullYear();
@@ -88,9 +81,11 @@ const WeeklyTable = ({
 
 	const bookingsByRow = getBookingsByRow(bookings, week);
 	const bookingsByDesk = getBookingsByDesk(bookings, week, desks);
-	// function setThisMonday() {
 
-	// }
+	function setThisMonday() {
+		setCurrentMonday(startOfTheWeekDate);
+	}
+
 	function setNextMonday() {
 		setCurrentMonday((currentMonday) => {
 			return new Date(
@@ -113,15 +108,15 @@ const WeeklyTable = ({
 	return (
 		<div>
 			<div>
-				{/* <tr> */}
-				<span>This Week</span>
+				<button className={"inner"} onClick={setThisMonday}>
+					This week
+				</button>
 				<button className={"inner"} onClick={setPreviousMonday}>
 					Previous week
 				</button>
 				<button className={"inner"} onClick={setNextMonday}>
 					Next Week
 				</button>
-				{/* </tr> */}
 			</div>
 			<table>
 				<thead>
@@ -147,7 +142,17 @@ const WeeklyTable = ({
 						<tr key={i}>
 							<td></td>
 							{row.map((booking, index) => (
-								<td key={index}>{booking?.name}</td>
+								<td key={index} className="visible-on-hover">
+									{booking?.name}
+									{booking?.name && (
+										<span className="hide">
+											<ModalCancelBookingScreen
+												booking={booking}
+												refreshBooking={refreshBooking}
+											/>
+										</span>
+									)}
+								</td>
 							))}
 						</tr>
 					))}
@@ -155,7 +160,17 @@ const WeeklyTable = ({
 						<tr key={desk.name}>
 							<td>{desk.name}</td>
 							{bookingsByDesk[desk.name].map((booking, index) => (
-								<td key={index}>{booking?.name}</td>
+								<td key={index} className="visible-on-hover">
+									{booking?.name}
+									{booking?.name && (
+										<span className="hide">
+											<ModalCancelBookingScreen
+												booking={booking}
+												refreshBooking={refreshBooking}
+											/>
+										</span>
+									)}
+								</td>
 							))}
 						</tr>
 					))}
