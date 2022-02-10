@@ -130,7 +130,7 @@ const WeeklyTable = ({
 									refreshBooking={refreshBooking}
 									desks={desks}
 									users={users}
-									bookingsByDate={bookingsByDayWithDesk[date]}
+									bookingsForDate={bookingsByDayWithDesk[date]}
 								/>
 								<br />
 								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}

@@ -1,37 +1,34 @@
 import React from "react";
+import "./FloorPlan.css";
 
-const Desk = ({ desk, bookingForThisDesk }) => {
+const Desk = ({ desk, booking }) => {
+	const deskColor = `${booking ? "booked-desk" : "free-desk"}`;
 	return (
 		<>
 			<g transform={`rotate(${desk.r} 75 75)`}>
 				<rect
-					style={{
-						fill: bookingForThisDesk ? "red" : "green",
-						stroke: "#000000",
-						strokeWidth: "1",
-						fillOpacity: 0.6,
-					}}
+					className={deskColor}
 					width={150}
 					height={150}
 					x={0.5}
 					y={0.5}
 					rx={15}
 				/>
-				<circle cx="-55" cy="75" r="35" />
+				<circle className={deskColor} cx="-55" cy="75" r="35" />
 			</g>
 			<text fontSize={40} x={64} y={90}>
 				{desk.id}
 			</text>
 			<text fontSize={25} x={20} y={140}>
-				{bookingForThisDesk?.name}
+				{booking?.name}
 			</text>
 		</>
 	);
 };
 
-const FloorPlan = ({ desks, bookingsByDate }) => {
+const FloorPlan = ({ desks, bookings }) => {
 	const bookingsByDesk = {};
-	bookingsByDate.forEach((booking) => {
+	bookings.forEach((booking) => {
 		bookingsByDesk[booking.desk_id] = booking;
 	});
 
@@ -53,7 +50,7 @@ const FloorPlan = ({ desks, bookingsByDate }) => {
 			<g id="Group1" transform="translate(262 100)">
 				{desks.map((desk, i) => (
 					<g key={i} transform={`translate(${desk.x} ${desk.y})`}>
-						<Desk desk={desk} bookingForThisDesk={bookingsByDesk[desk.id]} />
+						<Desk desk={desk} booking={bookingsByDesk[desk.id]} />
 					</g>
 				))}
 			</g>

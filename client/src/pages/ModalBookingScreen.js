@@ -19,7 +19,7 @@ function ModalBookingScreen({
 	refreshBooking,
 	desks,
 	users,
-	bookingsByDate,
+	bookingsForDate,
 }) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState(null);
@@ -167,7 +167,7 @@ function ModalBookingScreen({
 										}}
 									/>
 									<br />
-									<FloorPlan desks={desks} bookingsByDate={bookingsByDate} />
+									<FloorPlan desks={desks} bookings={bookingsForDate} />
 								</Form.Field>
 							)}
 						</Segment>

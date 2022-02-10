@@ -1,0 +1,9 @@
+.booked-desk {
+    fill: red;
+    fill-opacity: 0.6
+}
+
+.free-desk {
+    fill: aquamarine;
+    fill-opacity: 0.6
+}
