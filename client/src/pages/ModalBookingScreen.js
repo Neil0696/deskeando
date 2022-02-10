@@ -146,7 +146,7 @@ function ModalBookingScreen({
 											placeholder="Date"
 											type="text"
 											value={formatBookingDate(bookingDate)}
-											readonly
+											readOnly
 										/>
 									</Form.Field>
 								</Segment>
