@@ -14,7 +14,13 @@ import {
 	Dropdown,
 } from "semantic-ui-react";
 
-function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
+function ModalBookingScreen({
+	bookingDate,
+	refreshBooking,
+	desks,
+	users,
+	bookingsForDate,
+}) {
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState(null);
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
@@ -161,7 +167,7 @@ function ModalBookingScreen({ bookingDate, refreshBooking, desks, users }) {
 										}}
 									/>
 									<br />
-									<FloorPlan desks={desks} />
+									<FloorPlan desks={desks} bookings={bookingsForDate} />
 								</Form.Field>
 							)}
 						</Segment>
