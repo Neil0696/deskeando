@@ -1,15 +1,30 @@
 .booked-desk {
-	fill: red;
+	fill: #747474;
 	fill-opacity: 0.6;
 }
 
 .free-desk {
-	fill: aquamarine;
+	fill: #747474;
 	fill-opacity: 0.6;
 }
+.free-desk:hover + .available-place-marker, .free-desk:hover {
+	fill: #98afc7;
+}
 
-.selected {
-    
-	fill: yellow;
-	fill-opacity: 0.6;
+.booked-place-marker {
+	fill: orange;
+}
+
+.available-place-marker {
+	fill: aquamarine;
+}
+
+.selected-desk {
+	fill: rgb(80, 80, 241);
+}
+
+.desk-detail {
+	font-family: "Trebuchet MS", sans-serif;
+	fill: white;
+	text-anchor: middle;
 }
