@@ -22,10 +22,6 @@ table {
 	align-self: flex-end;
 }
 
-.inner {
-	display: inline-block;
-}
-
 .hide {
 	display: none;
 }

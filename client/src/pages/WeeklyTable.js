@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import moment from "moment";
+import React from "react";
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
@@ -41,12 +40,13 @@ const getBookingsByDesk = (bookings, week, desks) => {
 		);
 	});
 
-	return{ bookingsByDesk, bookingsByDayWithDesk };
+	return { bookingsByDesk, bookingsByDayWithDesk };
 };
 
 const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
-	const countBookingsByDay = bookings.filter((booking) => booking.date === date)
-		.length;
+	const countBookingsByDay = bookings.filter(
+		(booking) => booking.date === date
+	).length;
 
 	const availableDesks = maxDesksForDay - countBookingsByDay;
 
@@ -63,61 +63,17 @@ const WeeklyTable = ({
 	refreshBooking,
 	maxDesksForDay,
 	users,
+	week,
 }) => {
-	const startOfTheWeekDate = moment()
-		.startOf("isoWeek")
-		.toDate();
-	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
-
-	let week = [];
-	const year = currentMonday.getFullYear();
-	const month = currentMonday.getMonth();
-	let date = currentMonday.getDate();
-
-	for (let i = 0; i < 5; i++) {
-		// this will even work if we cross over into the next month!!
-		week.push(new Date(year, month, date + i).toISOString());
-	}
-
 	const bookingsByRow = getBookingsByRow(bookings, week);
-	const {bookingsByDesk, bookingsByDayWithDesk} = getBookingsByDesk(bookings, week, desks);
-
-	function setThisMonday() {
-		setCurrentMonday(startOfTheWeekDate);
-	}
-
-	function setNextMonday() {
-		setCurrentMonday((currentMonday) => {
-			return new Date(
-				currentMonday.getFullYear(),
-				currentMonday.getMonth(),
-				currentMonday.getDate() + 7
-			);
-		});
-	}
-	function setPreviousMonday() {
-		setCurrentMonday((currentMonday) => {
-			return new Date(
-				currentMonday.getFullYear(),
-				currentMonday.getMonth(),
-				currentMonday.getDate() - 7
-			);
-		});
-	}
+	const { bookingsByDesk, bookingsByDayWithDesk } = getBookingsByDesk(
+		bookings,
+		week,
+		desks
+	);
 
 	return (
 		<div id="table" className="table-container">
-			<div className="inner">
-				<button  onClick={setThisMonday}>
-					This week
-				</button>
-				<button  onClick={setPreviousMonday}>
-					Previous week
-				</button>
-				<button onClick={setNextMonday}>
-					Next Week
-				</button>
-			</div>
 			<table>
 				<thead>
 					<tr>
