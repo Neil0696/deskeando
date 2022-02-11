@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import moment from "moment";
+import React from "react";
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
@@ -66,6 +65,7 @@ const WeeklyTable = ({
 	refreshBooking,
 	maxDesksForDay,
 	users,
+	week,
 }) => {
 	const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
 	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
@@ -111,8 +111,7 @@ const WeeklyTable = ({
 	}
 
 	return (
-		<div>
-			<div className="arrow">
+		<div className="arrow">
 				<Button className={"arrows"} icon onClick={setPreviousMonday}>
 					<Icon name="angle left" size="big" />
 				</Button>
