@@ -41,12 +41,13 @@ const getBookingsByDesk = (bookings, week, desks) => {
 		);
 	});
 
-	return{ bookingsByDesk, bookingsByDayWithDesk };
+	return { bookingsByDesk, bookingsByDayWithDesk };
 };
 
 const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
-	const countBookingsByDay = bookings.filter((booking) => booking.date === date)
-		.length;
+	const countBookingsByDay = bookings.filter(
+		(booking) => booking.date === date
+	).length;
 
 	const availableDesks = maxDesksForDay - countBookingsByDay;
 
@@ -64,9 +65,7 @@ const WeeklyTable = ({
 	maxDesksForDay,
 	users,
 }) => {
-	const startOfTheWeekDate = moment()
-		.startOf("isoWeek")
-		.toDate();
+	const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
 	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
 	let week = [];
@@ -80,7 +79,11 @@ const WeeklyTable = ({
 	}
 
 	const bookingsByRow = getBookingsByRow(bookings, week);
-	const {bookingsByDesk, bookingsByDayWithDesk} = getBookingsByDesk(bookings, week, desks);
+	const { bookingsByDesk, bookingsByDayWithDesk } = getBookingsByDesk(
+		bookings,
+		week,
+		desks
+	);
 
 	function setThisMonday() {
 		setCurrentMonday(startOfTheWeekDate);
@@ -108,14 +111,20 @@ const WeeklyTable = ({
 	return (
 		<div>
 			<div>
+				<button className={"inner"} onClick={setPreviousMonday}>
+					Prev week
+				</button>
+				<a href="#" class="previous">
+					&laquo;
+				</a>
 				<button className={"inner"} onClick={setThisMonday}>
 					This week
 				</button>
-				<button className={"inner"} onClick={setPreviousMonday}>
-					Previous week
-				</button>
+				<a href="#" class="next">
+					&raquo;
+				</a>
 				<button className={"inner"} onClick={setNextMonday}>
-					Next Week
+					Next week
 				</button>
 			</div>
 			<table>
