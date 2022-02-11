@@ -11,6 +11,10 @@ export function Home() {
 	const [refreshKey, setRefreshKey] = useState(0);
 	const [users, setUsers] = useState([]);
 
+	const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
+	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
+	let week = [];
+
 	useEffect(() => {
 		fetch("/api/bookings")
 			.then((response) => response.json())

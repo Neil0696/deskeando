@@ -46,3 +46,8 @@ body {
 		margin-top: 26vh;
 	}
 }
+
+.inner {
+	display: flex;
+	margin-top: 40px;
+}
