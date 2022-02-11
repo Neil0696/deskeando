@@ -106,15 +106,15 @@ const WeeklyTable = ({
 	}
 
 	return (
-		<div>
-			<div>
-				<button className={"inner"} onClick={setThisMonday}>
+		<div id="table" className="table-container">
+			<div className="inner">
+				<button  onClick={setThisMonday}>
 					This week
 				</button>
-				<button className={"inner"} onClick={setPreviousMonday}>
+				<button  onClick={setPreviousMonday}>
 					Previous week
 				</button>
-				<button className={"inner"} onClick={setNextMonday}>
+				<button onClick={setNextMonday}>
 					Next Week
 				</button>
 			</div>
