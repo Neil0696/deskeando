@@ -1,9 +1,10 @@
 table,
 td,
 th {
-	border: 1px solid rgb(51, 42, 42);
-	background-color: #385064;
-	border-radius: 5px;
+	border: 2px solid #a7a6a5;
+	border-collapse: collapse;
+	background-color: #ffffff;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
 }
 
 td,
@@ -13,26 +14,14 @@ th {
 
 table {
 	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
+	margin-top: 40px;
 	font-size: 0.9em;
-	box-shadow: 0 0 10px rgba(182, 154, 154, 0.15);
-	border-bottom: 4px solid #385064;
-	color: #ddd4d2;
-	border-radius: 5px;
+	font-style: normal;
+	color: black;
+	background-color: #ddd4d2;
+	align-self: flex-end;
 }
 
-th {
-	background-color: #2e3942;
-}
-
-body {
-	background-color: #252f38;
-}
-
-th {
-	color: rgb(233, 226, 226);
-}
 .inner {
 	display: inline-block;
 	border-radius: 40px;

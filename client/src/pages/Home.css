@@ -1,10 +1,19 @@
-/* * {
-	font-family: sans-serif;
-} */
+html,
+main,
+body {
+	background-color: #a7a6a5;
+	height: 100%;
+}
+
+main {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
 
 .logo {
-	width: 150px;
+	width: 300px;
 	display: block;
 	margin-right: auto;
-	margin-top: -25px;
+	margin-top: 100px;
 }
