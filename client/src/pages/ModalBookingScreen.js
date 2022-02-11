@@ -187,6 +187,7 @@ function ModalBookingScreen({
 								bookings={bookingsForDate}
 								deskId={deskId}
 								setDeskId={setDeskId}
+								setDontSelectDesk={setDontSelectDesk}
 							/>
 						</Grid.Column>
 					</Grid>
