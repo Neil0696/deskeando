@@ -181,14 +181,16 @@ function ModalBookingScreen({
 								</Segment>
 							</Form>
 						</Grid.Column>
-						<Grid.Column>
-							<FloorPlan
-								desks={desks}
-								bookings={bookingsForDate}
-								deskId={deskId}
-								setDeskId={setDeskId}
-							/>
-						</Grid.Column>
+						{!dontSelectDesk && (
+							<Grid.Column>
+								<FloorPlan
+									desks={desks}
+									bookings={bookingsForDate}
+									deskId={deskId}
+									setDeskId={setDeskId}
+								/>
+							</Grid.Column>
+						)}
 					</Grid>
 				</Modal.Description>
 			</Modal.Content>

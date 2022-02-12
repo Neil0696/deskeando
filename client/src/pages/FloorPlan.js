@@ -1,24 +1,21 @@
 import React from "react";
 import "./FloorPlan.css";
 
-const Desk = ({ desk, booking, deskId, setDeskId }) => {
-	const placeMarkerColor = `${
-		booking ? "booked-place-marker" : "available-place-marker"
-	}`;
-	const deskColor = `${
-		booking ? "booked-desk" : deskId === desk.id ? "selected-desk" : "free-desk"
-	}`;
+const Desk = ({ desk, booking, isSelected }) => {
+	const placeMarkerColor = booking
+		? "booked-place-marker"
+		: isSelected
+		? "selected-place-marker"
+		: "available-place-marker";
+
+	const deskColor = booking
+		? "booked-desk"
+		: isSelected
+		? "selected-desk"
+		: "free-desk";
+
 	return (
-		<g
-			transform={`translate(${desk.x} ${desk.y})`}
-			onClick={() => {
-				if (!booking) {
-					if (deskId === desk.id) {
-						setDeskId(null);
-					} else setDeskId(desk.id);
-				}
-			}}
-		>
+		<>
 			<g className={deskColor}>
 				<rect
 					className={deskColor}
@@ -42,7 +39,7 @@ const Desk = ({ desk, booking, deskId, setDeskId }) => {
 					{booking?.name}
 				</text>
 			</g>
-		</g>
+		</>
 	);
 };
 
@@ -69,13 +66,23 @@ const FloorPlan = ({ desks, bookings, deskId, setDeskId }) => {
 			/>
 			<g id="Group1" transform="translate(210 85)">
 				{desks.map((desk, i) => (
-					<Desk
-						key={i}
-						desk={desk}
-						booking={bookingsByDesk[desk.id]}
-						deskId={deskId}
-						setDeskId={setDeskId}
-					/>
+					<g
+						transform={`translate(${desk.x} ${desk.y})`}
+						onClick={() => {
+							if (!bookingsByDesk[desk.id]) {
+								if (desk.id === deskId) {
+									setDeskId(null);
+								} else setDeskId(desk.id);
+							}
+						}}
+					>
+						<Desk
+							key={i}
+							desk={desk}
+							booking={bookingsByDesk[desk.id]}
+							isSelected={desk.id === deskId}
+						/>
+					</g>
 				))}
 			</g>
 		</svg>

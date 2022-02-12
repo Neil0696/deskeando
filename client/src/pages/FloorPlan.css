@@ -7,7 +7,8 @@
 	fill: #747474;
 	fill-opacity: 0.6;
 }
-.free-desk:hover + .available-place-marker, .free-desk:hover {
+.free-desk:hover + .available-place-marker,
+.free-desk:hover {
 	fill: #98afc7;
 }
 
@@ -19,7 +20,8 @@
 	fill: aquamarine;
 }
 
-.selected-desk {
+.selected-desk,
+.selected-place-marker {
 	fill: rgb(80, 80, 241);
 }
 
