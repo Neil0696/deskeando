@@ -4,12 +4,20 @@ th {
 	border: 2px solid #a7a6a5;
 	border-collapse: collapse;
 	background-color: #ffffff;
-	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-family: 'Quicksand', sans-serif;
+	font-weight: 700;
+}
+
+td.desk-column {
+	padding: 10px;
+	text-align: center;
+	width: 65px;
+	min-width: 35px;
 }
 
 td,
 th {
-	padding: 10px;
+	padding: 5px;
 }
 
 table {

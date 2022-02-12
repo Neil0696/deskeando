@@ -57,17 +57,17 @@ export function Home() {
 					src={logo}
 					alt="Just the Deskeando logo"
 				/>
-
-				{/* <Link to="/about/this/site">About</Link> */}
 			</div>
-			<WeeklyTable
-				bookings={bookings}
-				desks={desks}
-				refreshBooking={refreshBooking}
-				maxDesksForDay={MAX_DESKS_FOR_DAY}
-				users={users}
-				week={week}
-			/>
+			<div id="weekly-table">
+				<WeeklyTable
+					bookings={bookings}
+					desks={desks}
+					refreshBooking={refreshBooking}
+					maxDesksForDay={MAX_DESKS_FOR_DAY}
+					users={users}
+					week={week}
+				/>
+			</div>
 		</main>
 	);
 }
