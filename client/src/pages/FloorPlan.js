@@ -1,7 +1,7 @@
 import React from "react";
 import "./FloorPlan.css";
 
-const Desk = ({ desk, booking, deskId, setDeskId, setDontSelectDesk }) => {
+const Desk = ({ desk, booking, deskId, setDeskId }) => {
 	const placeMarkerColor = `${
 		booking ? "booked-place-marker" : "available-place-marker"
 	}`;
@@ -15,10 +15,7 @@ const Desk = ({ desk, booking, deskId, setDeskId, setDontSelectDesk }) => {
 				if (!booking) {
 					if (deskId === desk.id) {
 						setDeskId(null);
-					} else {
-						setDontSelectDesk(false);
-						setDeskId(desk.id);
-					}
+					} else setDeskId(desk.id);
 				}
 			}}
 		>
@@ -49,13 +46,7 @@ const Desk = ({ desk, booking, deskId, setDeskId, setDontSelectDesk }) => {
 	);
 };
 
-const FloorPlan = ({
-	desks,
-	bookings,
-	deskId,
-	setDeskId,
-	setDontSelectDesk,
-}) => {
+const FloorPlan = ({ desks, bookings, deskId, setDeskId }) => {
 	const bookingsByDesk = {};
 	bookings.forEach((booking) => {
 		bookingsByDesk[booking.desk_id] = booking;
@@ -84,7 +75,6 @@ const FloorPlan = ({
 						booking={bookingsByDesk[desk.id]}
 						deskId={deskId}
 						setDeskId={setDeskId}
-						setDontSelectDesk={setDontSelectDesk}
 					/>
 				))}
 			</g>
