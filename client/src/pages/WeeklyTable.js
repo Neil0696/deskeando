@@ -115,7 +115,7 @@ const WeeklyTable = ({
 					))}
 					{desks.map((desk) => (
 						<tr key={desk.name}>
-							<td>{desk.name}</td>
+							<td className="desk-column">{desk.name}</td>
 							{bookingsByDesk[desk.name].map((booking, index) => (
 								<td key={index} className="visible-on-hover">
 									{booking?.name}

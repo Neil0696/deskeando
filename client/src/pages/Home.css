@@ -8,7 +8,8 @@ body {
 main {
 	display: flex;
 	width: 100%;
-	justify-content: space-between;
+	justify-content: space-evenly;
+	margin-right: 50px;
 }
 
 .logo {
