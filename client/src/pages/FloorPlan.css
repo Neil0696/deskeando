@@ -3,12 +3,12 @@
 	fill-opacity: 0.6;
 }
 
-.free-desk {
+.available-desk {
 	fill: #747474;
 	fill-opacity: 0.6;
 }
-.free-desk:hover + .available-place-marker,
-.free-desk:hover {
+.available-desk:hover + .available-place-marker,
+.available-desk:hover {
 	fill: #98afc7;
 }
 
