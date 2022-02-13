@@ -45,6 +45,11 @@ th {
 	margin-top: 40px;
 }
 
+.inner {
+	display: inline-block;
+	margin-top: 40px;
+}
+
 .hide {
 	display: none;
 }
