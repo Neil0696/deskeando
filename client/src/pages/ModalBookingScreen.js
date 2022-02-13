@@ -27,7 +27,7 @@ function ModalBookingScreen({
 	const [open, setOpen] = React.useState(false);
 	const [name, setName] = useState(null);
 	const [dontSelectDesk, setDontSelectDesk] = useState(true);
-	const [deskId, setDeskId] = useState(null);
+	const [currentlySelectedDeskId, getCurrentlySelectedDeskId] = useState(null);
 	const [bookingErrorMessage, setBookingErrorMessage] = useState(null);
 	const [nameErrorMessage, setNameErrorMessage] = useState(null);
 	const [dateErrorMessage, setDateErrorMessage] = useState(null);
@@ -58,7 +58,7 @@ function ModalBookingScreen({
 				date: bookingDate,
 			};
 			if (!dontSelectDesk) {
-				newBooking.desk_id = deskId;
+				newBooking.desk_id = currentlySelectedDeskId;
 			}
 
 			fetch("/api/bookings", {
@@ -73,7 +73,7 @@ function ModalBookingScreen({
 						setOpen(false);
 						refreshBooking();
 						setName(null);
-						setDeskId(null);
+						getCurrentlySelectedDeskId(null);
 					} else {
 						const error = await response.json();
 						if (error.field === "name") {
@@ -170,10 +170,10 @@ function ModalBookingScreen({
 												placeholder="Desk Selection"
 												options={deskSelection}
 												selection
-												value={deskId}
+												value={currentlySelectedDeskId}
 												onChange={(e, data) => {
 													setDeskErrorMessage(null);
-													setDeskId(data.value);
+													getCurrentlySelectedDeskId(data.value);
 												}}
 											/>
 										</Form.Field>
@@ -186,8 +186,8 @@ function ModalBookingScreen({
 								<FloorPlan
 									desks={desks}
 									bookings={bookingsForDate}
-									deskId={deskId}
-									setDeskId={setDeskId}
+									currentlySelectedDeskId={currentlySelectedDeskId}
+									getCurrentlySelectedDeskId={getCurrentlySelectedDeskId}
 								/>
 							</Grid.Column>
 						)}
@@ -205,7 +205,7 @@ function ModalBookingScreen({
 							setDeskErrorMessage(null);
 							setName(null);
 							setOpen(false);
-							setDeskId(null);
+							getCurrentlySelectedDeskId(null);
 						}}
 					>
 						Cancel

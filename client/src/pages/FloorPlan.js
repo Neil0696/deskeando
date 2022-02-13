@@ -41,7 +41,12 @@ const Desk = ({ desk, booking, isSelected }) => {
 	);
 };
 
-const FloorPlan = ({ desks, bookings, deskId, setDeskId }) => {
+const FloorPlan = ({
+	desks,
+	bookings,
+	currentlySelectedDeskId,
+	getCurrentlySelectedDeskId,
+}) => {
 	const bookingsByDesk = {};
 	bookings.forEach((booking) => {
 		bookingsByDesk[booking.desk_id] = booking;
@@ -69,16 +74,16 @@ const FloorPlan = ({ desks, bookings, deskId, setDeskId }) => {
 						transform={`translate(${desk.x} ${desk.y})`}
 						onClick={() => {
 							if (!bookingsByDesk[desk.id]) {
-								if (desk.id === deskId) {
-									setDeskId(null);
-								} else setDeskId(desk.id);
+								if (desk.id === currentlySelectedDeskId) {
+									getCurrentlySelectedDeskId(null);
+								} else getCurrentlySelectedDeskId(desk.id);
 							}
 						}}
 					>
 						<Desk
 							desk={desk}
 							booking={bookingsByDesk[desk.id]}
-							isSelected={desk.id === deskId}
+							isSelected={desk.id === currentlySelectedDeskId}
 						/>
 					</g>
 				))}
