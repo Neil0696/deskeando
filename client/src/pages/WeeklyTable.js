@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import moment from "moment";
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 import "./WeeklyTable.css";
+
 
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
@@ -63,8 +65,19 @@ const WeeklyTable = ({
 	refreshBooking,
 	maxDesksForDay,
 	users,
-	week,
 }) => {
+const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
+const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
+
+let week = [];
+const year = currentMonday.getFullYear();
+const month = currentMonday.getMonth();
+let date = currentMonday.getDate();
+
+for (let i = 0; i < 5; i++) {
+	week.push(new Date(year, month, date + i).toISOString());
+}
+
 	const bookingsByRow = getBookingsByRow(bookings, week);
 	const { bookingsByDesk, bookingsByDayWithDesk } = getBookingsByDesk(
 		bookings,
@@ -72,9 +85,37 @@ const WeeklyTable = ({
 		desks
 	);
 
+	function setThisMonday() {
+		setCurrentMonday(startOfTheWeekDate);
+	}
+
+	function setNextMonday() {
+		setCurrentMonday((currentMonday) => {
+			return new Date(
+				currentMonday.getFullYear(),
+				currentMonday.getMonth(),
+				currentMonday.getDate() + 7
+			);
+		});
+	}
+	function setPreviousMonday() {
+		setCurrentMonday((currentMonday) => {
+			return new Date(
+				currentMonday.getFullYear(),
+				currentMonday.getMonth(),
+				currentMonday.getDate() - 7
+			);
+		});
+	}
+
 	return (
-		<div id="table" className="table-container">
-			<table>
+		<div>
+			<div className="inner">
+				<button onClick={setThisMonday}>This week</button>
+				<button onClick={setPreviousMonday}>Previous week</button>
+				<button onClick={setNextMonday}>Next Week</button>
+			</div>
+			<table id="table" className="table-container">
 				<thead>
 					<tr>
 						<th></th>
