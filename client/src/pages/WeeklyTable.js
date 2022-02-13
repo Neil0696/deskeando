@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import moment from "moment";
 import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 import "./WeeklyTable.css";
 import { Button } from "semantic-ui-react";
 import { Icon } from "semantic-ui-react";
+
 
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
@@ -65,20 +67,18 @@ const WeeklyTable = ({
 	refreshBooking,
 	maxDesksForDay,
 	users,
-	week,
 }) => {
-	const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
-	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
+const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
+const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
-	let week = [];
-	const year = currentMonday.getFullYear();
-	const month = currentMonday.getMonth();
-	let date = currentMonday.getDate();
+let week = [];
+const year = currentMonday.getFullYear();
+const month = currentMonday.getMonth();
+let date = currentMonday.getDate();
 
-	for (let i = 0; i < 5; i++) {
-		// this will even work if we cross over into the next month!!
-		week.push(new Date(year, month, date + i).toISOString());
-	}
+for (let i = 0; i < 5; i++) {
+	week.push(new Date(year, month, date + i).toISOString());
+}
 
 	const bookingsByRow = getBookingsByRow(bookings, week);
 	const { bookingsByDesk, bookingsByDayWithDesk } = getBookingsByDesk(
@@ -111,6 +111,7 @@ const WeeklyTable = ({
 	}
 
 	return (
+		<div>
 		<div className="arrow">
 				<Button className={"arrows"} icon onClick={setPreviousMonday}>
 					<Icon name="angle left" size="big" />
@@ -122,7 +123,7 @@ const WeeklyTable = ({
 					<Icon name="angle right" size="big" />
 				</Button>
 			</div>
-			<table>
+			<table id="table" className="table-container">
 				<thead>
 					<tr>
 						<th></th>
