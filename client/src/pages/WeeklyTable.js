@@ -5,6 +5,7 @@ import ModalBookingScreen from "./ModalBookingScreen";
 import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 import "./WeeklyTable.css";
 
+
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
 	week.forEach((day) => {
