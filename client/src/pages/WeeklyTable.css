@@ -4,8 +4,7 @@ th {
 	border: 2px solid #a7a6a5;
 	border-collapse: collapse;
 	background-color: #ffffff;
-	font-family: 'Quicksand', sans-serif;
-	font-weight: 700;
+	font-family: "Quicksand", sans-serif;
 }
 
 td.desk-column {
@@ -13,6 +12,7 @@ td.desk-column {
 	text-align: center;
 	width: 65px;
 	min-width: 35px;
+	font-weight: 700;
 }
 
 td,
@@ -20,14 +20,21 @@ th {
 	padding: 5px;
 }
 
-table {
+th {
+	font-weight: 700;
+}
+
+.table-container #table {
+	margin-right: 0;
 	width: 100%;
 	margin-top: 10px;
-	font-size: 0.9em;
-	font-style: normal;
-	color: black;
 	background-color: #ddd4d2;
-	align-self: flex-end;
+	color: black;
+	font-size: 1.2em;
+}
+
+.table-container {
+	padding: 10px;
 }
 
 .inner {
@@ -68,4 +75,41 @@ table {
 	display: flex;
 	align-items: center;
 	margin-bottom: 30px;
+}
+
+td.visible-on-hover,
+th {
+	font-weight: 500;
+	min-width: 90px;
+	height: 50px;
+}
+
+@media (max-width: 880px) {
+	.table-container #table {
+		margin: auto;
+		width: 100%;
+		font-size: 0.8em;
+		padding: 1px;
+	}
+	td.desk-column {
+		padding: 1px;
+		text-align: center;
+		width: 30px;
+		min-width: px;
+	}
+	td.visible-on-hover,
+	th {
+		font-weight: 500;
+		min-width: 50px;
+		height: 26px;
+	}
+}
+
+@media (min-height: 600px) {
+	.table-container #table {
+		margin-top: 20px;
+	}
+	.inner {
+		margin-top: 18vh;
+	}
 }

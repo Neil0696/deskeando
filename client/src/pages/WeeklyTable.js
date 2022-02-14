@@ -7,7 +7,6 @@ import "./WeeklyTable.css";
 import { Button } from "semantic-ui-react";
 import { Icon } from "semantic-ui-react";
 
-
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
 	week.forEach((day) => {
@@ -68,17 +67,17 @@ const WeeklyTable = ({
 	maxDesksForDay,
 	users,
 }) => {
-const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
-const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
+	const startOfTheWeekDate = moment().startOf("isoWeek").toDate();
+	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
-let week = [];
-const year = currentMonday.getFullYear();
-const month = currentMonday.getMonth();
-let date = currentMonday.getDate();
+	let week = [];
+	const year = currentMonday.getFullYear();
+	const month = currentMonday.getMonth();
+	let date = currentMonday.getDate();
 
-for (let i = 0; i < 5; i++) {
-	week.push(new Date(year, month, date + i).toISOString());
-}
+	for (let i = 0; i < 5; i++) {
+		week.push(new Date(year, month, date + i).toISOString());
+	}
 
 	const bookingsByRow = getBookingsByRow(bookings, week);
 	const { bookingsByDesk, bookingsByDayWithDesk } = getBookingsByDesk(
@@ -111,7 +110,7 @@ for (let i = 0; i < 5; i++) {
 	}
 
 	return (
-		<div>
+		<div className="table-container">
 		<div className="arrow">
 				<Button className={"arrows"} icon onClick={setPreviousMonday}>
 					<Icon name="angle left" size="big" />
@@ -123,7 +122,7 @@ for (let i = 0; i < 5; i++) {
 					<Icon name="angle right" size="big" />
 				</Button>
 			</div>
-			<table id="table" className="table-container">
+			<table id="table" className="table">
 				<thead>
 					<tr>
 						<th></th>
