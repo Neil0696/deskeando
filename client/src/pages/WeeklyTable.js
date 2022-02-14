@@ -4,6 +4,8 @@ import { formatBookingDate } from "../util";
 import ModalBookingScreen from "./ModalBookingScreen";
 import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 import "./WeeklyTable.css";
+import { Button } from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
@@ -110,22 +112,16 @@ const WeeklyTable = ({
 
 	return (
 		<div>
-			<div>
-				<button className={"inner"} onClick={setPreviousMonday}>
-					Prev week
-				</button>
-				<a href="#" class="previous">
-					&laquo;
-				</a>
+			<div className="arrow">
+				<Button className={"arrows"} icon onClick={setPreviousMonday}>
+					<Icon name="angle left" size="big" />
+				</Button>
 				<button className={"inner"} onClick={setThisMonday}>
 					This week
 				</button>
-				<a href="#" class="next">
-					&raquo;
-				</a>
-				<button className={"inner"} onClick={setNextMonday}>
-					Next week
-				</button>
+				<Button className={"arrows"} icon onClick={setPreviousMonday}>
+					<Icon name="angle right" size="big" />
+				</Button>
 			</div>
 			<table>
 				<thead>
