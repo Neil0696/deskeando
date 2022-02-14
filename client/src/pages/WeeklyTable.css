@@ -1,8 +1,8 @@
 table,
 td,
 th {
-	border: 2px solid #a7a6a5;
-	border-collapse: collapse;
+	border-spacing: 4px;
+	border-collapse: separate;
 	background-color: #ffffff;
 	font-family: "Quicksand", sans-serif;
 }
@@ -17,7 +17,7 @@ td.desk-column {
 
 td,
 th {
-	padding: 5px;
+	padding: 8px;
 }
 
 th {
@@ -30,7 +30,7 @@ th {
 	margin-top: 10px;
 	background-color: #ddd4d2;
 	color: black;
-	font-size: 1.2em;
+	font-size: 1.2rem;
 }
 
 .table-container {
@@ -57,6 +57,11 @@ th {
 	height: 50px;
 }
 
+td.visible-on-hover {
+	border-radius: 4px 0 0 3px;
+	border-left: 8px solid #ff9054;
+}
+
 @media (max-width: 880px) {
 	.table-container #table {
 		margin: auto;
@@ -68,13 +73,17 @@ th {
 		padding: 1px;
 		text-align: center;
 		width: 30px;
-		min-width: px;
 	}
 	td.visible-on-hover,
 	th {
-		font-weight: 500;
+		font-size: 1.8rem;
 		min-width: 50px;
 		height: 26px;
+		font-size: 0.9rem;
+	}
+	td,
+	th {
+		padding: 3px;
 	}
 }
 
