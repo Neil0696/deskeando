@@ -2,19 +2,47 @@ html,
 main,
 body {
 	background-color: #a7a6a5;
-	height: 100%;
+	height: 100vh;
 }
 
-main {
-	display: flex;
-	width: 100%;
-	justify-content: space-evenly;
-	margin-right: 50px;
+body {
+	overflow: auto;
+	scroll-behavior: smooth;
 }
 
-.logo {
+#wrapper {
+	display: grid;
+	grid: auto / 300px auto;
+	grid-gap: 10px;
+}
+
+.wrapper-inner1 {
+	margin-top: 90px;
 	width: 300px;
-	display: block;
-	margin-right: auto;
-	margin-top: 100px;
+	height: 300px;
+	max-width: 300px;
+}
+
+@media (max-width: 880px) {
+	#wrapper {
+		scroll-behavior: smooth;
+		display: flex;
+		flex-direction: column;
+		margin: auto;
+	}
+	.wrapper-inner1 {
+		transform: scale(50%, 50%);
+		height: px;
+		width: px;
+		margin-top: auto;
+		display: flex;
+		align-self: center;
+		justify-content: space-between;
+	}
+}
+
+@media (min-height: 600px) {
+	.wrapper-inner1 {
+		margin-top: 26vh;
+	}
 }

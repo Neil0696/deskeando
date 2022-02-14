@@ -38,17 +38,19 @@ export function Home() {
 
 	return (
 		<main role="main">
-			<div>
-				<img className="logo" data-qa="logo" src={logo} alt="Deskeando logo" />
-			</div>
-			<div id="weekly-table">
-				<WeeklyTable
-					bookings={bookings}
-					desks={desks}
-					refreshBooking={refreshBooking}
-					maxDesksForDay={MAX_DESKS_FOR_DAY}
-					users={users}
-				/>
+			<div id="wrapper">
+				<grid className="wrapper-inner1">
+					<img src={logo} alt="Deskeando Logo" />
+				</grid>
+				<grid className="wrapper-inner2">
+					<WeeklyTable
+						bookings={bookings}
+						desks={desks}
+						refreshBooking={refreshBooking}
+						maxDesksForDay={MAX_DESKS_FOR_DAY}
+						users={users}
+					/>
+				</grid>
 			</div>
 		</main>
 	);
