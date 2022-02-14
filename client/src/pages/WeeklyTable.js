@@ -5,7 +5,6 @@ import ModalBookingScreen from "./ModalBookingScreen";
 import ModalCancelBookingScreen from "./ModalCancelBookingScreen";
 import "./WeeklyTable.css";
 
-
 const getBookingsByRow = (bookings, week) => {
 	const bookingsByDayWithNoDesk = {};
 	week.forEach((day) => {
@@ -121,16 +120,21 @@ const WeeklyTable = ({
 						<th></th>
 						{week.map((date) => (
 							<th key={date}>
-								{formatBookingDate(date)}
-								<ModalBookingScreen
-									bookingDate={date}
-									refreshBooking={refreshBooking}
-									desks={desks}
-									users={users}
-									bookingsForDate={bookingsByDayWithDesk[date]}
-								/>
-								<br />
-								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
+								<div className="header-date">{formatBookingDate(date)}</div>
+								<div className="grid">
+									<grid className="date-grid">
+										{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
+									</grid>
+									<grid className="header-add-icon">
+										<ModalBookingScreen
+											bookingDate={date}
+											refreshBooking={refreshBooking}
+											desks={desks}
+											users={users}
+											bookingsForDate={bookingsByDayWithDesk[date]}
+										/>
+									</grid>
+								</div>
 							</th>
 						))}
 					</tr>
