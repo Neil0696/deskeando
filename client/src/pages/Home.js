@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import WeeklyTable from "./WeeklyTable";
 import "./Home.css";
-import logo from "../assets/logo5.png";
+import logo from "../assets/Deskeando-Logo.png";
 
 const MAX_DESKS_FOR_DAY = 5;
 
@@ -38,23 +38,20 @@ export function Home() {
 
 	return (
 		<main role="main">
-			<div>
-				<img
-					className="logo"
-					data-qa="logo"
-					src={logo}
-					alt="Just the Deskeando logo"
-				/>
-
-				{/* <Link to="/about/this/site">About</Link> */}
+			<div id="wrapper">
+				<grid className="wrapper-inner1">
+					<img src={logo} alt="Deskeando Logo" />
+				</grid>
+				<grid className="wrapper-inner2">
+					<WeeklyTable
+						bookings={bookings}
+						desks={desks}
+						refreshBooking={refreshBooking}
+						maxDesksForDay={MAX_DESKS_FOR_DAY}
+						users={users}
+					/>
+				</grid>
 			</div>
-			<WeeklyTable
-				bookings={bookings}
-				desks={desks}
-				refreshBooking={refreshBooking}
-				maxDesksForDay={MAX_DESKS_FOR_DAY}
-				users={users}
-			/>
 		</main>
 	);
 }

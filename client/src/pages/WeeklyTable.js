@@ -54,9 +54,9 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	const availableDesks = maxDesksForDay - countBookingsByDay;
 
 	if (availableDesks === 0) {
-		return "No desks available";
+		return "No desks";
 	} else {
-		return availableDesks + "/" + maxDesksForDay + " desks available";
+		return availableDesks + "/" + maxDesksForDay + "desks";
 	}
 };
 
@@ -76,7 +76,6 @@ const WeeklyTable = ({
 	let date = currentMonday.getDate();
 
 	for (let i = 0; i < 5; i++) {
-		// this will even work if we cross over into the next month!!
 		week.push(new Date(year, month, date + i).toISOString());
 	}
 
@@ -111,34 +110,40 @@ const WeeklyTable = ({
 	}
 
 	return (
-		<div>
+		<div className="table-container">
 			<div className="arrow">
-				<Button className={"arrows"} icon onClick={setPreviousMonday}>
+				<Button className="arrows" icon onClick={setPreviousMonday}>
 					<Icon name="angle left" size="big" />
 				</Button>
-				<button className={"inner"} onClick={setThisMonday}>
+				<button className="inner" onClick={setThisMonday}>
 					This week
 				</button>
-				<Button className={"arrows"} icon onClick={setPreviousMonday}>
+				<Button className="arrows" icon onClick={setNextMonday}>
 					<Icon name="angle right" size="big" />
 				</Button>
 			</div>
-			<table>
+			<table id="table" className="table">
 				<thead>
 					<tr>
 						<th></th>
 						{week.map((date) => (
 							<th key={date}>
-								{formatBookingDate(date)}
-								<ModalBookingScreen
-									bookingDate={date}
-									refreshBooking={refreshBooking}
-									desks={desks}
-									users={users}
-									bookingsForDate={bookingsByDayWithDesk[date]}
-								/>
-								<br />
-								{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
+								<div className="header-date">{formatBookingDate(date)}</div>
+								<div className="table-header">
+									<span className="available-desk">
+										{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
+										<br/>available
+									</span>
+									<span className="header-add-icon">
+										<ModalBookingScreen
+											bookingDate={date}
+											refreshBooking={refreshBooking}
+											desks={desks}
+											users={users}
+											bookingsForDate={bookingsByDayWithDesk[date]}
+										/>
+									</span>
+								</div>
 							</th>
 						))}
 					</tr>
@@ -164,7 +169,7 @@ const WeeklyTable = ({
 					))}
 					{desks.map((desk) => (
 						<tr key={desk.name}>
-							<td>{desk.name}</td>
+							<td className="desk-column">{desk.name}</td>
 							{bookingsByDesk[desk.name].map((booking, index) => (
 								<td key={index} className="visible-on-hover">
 									{booking?.name}

@@ -97,12 +97,16 @@ function ModalBookingScreen({
 			onOpen={() => setOpen(true)}
 			open={open}
 			trigger={
-				<Icon link name="add" size="small" circular inverted color="teal" />
+				// <Icon link name="add" size="small" circular inverted color="teal" />
+				<Icon.Group>
+    			<Icon name='map marker alternate' inverted color='orange'/>
+    			<Icon corner name='add' color='orange'/>
+  				</Icon.Group>
 			}
 		>
-			<Modal.Content scrolling>
+			<Modal.Content>
 				<Modal.Description>
-					<Grid columns={2} relaxed="very" stackable>
+					<Grid columns={2} stackable>
 						<Grid.Column>
 							<Header as="h2" content="Book Your Desk" />
 							{bookingErrorMessage && (

@@ -1,32 +1,70 @@
-.booked-desk {
-	fill: #747474;
-	fill-opacity: 0.6;
+.booked .desk-rectangle {
+	fill: #4a5566;
+	fill-opacity: 0.8;
 }
 
-.available-desk {
-	fill: #747474;
-	fill-opacity: 0.6;
-}
-.available-desk:hover + .available-place-marker,
-.available-desk:hover {
-	fill: #98afc7;
+.available .desk-rectangle {
+	fill: #4a5566;
+	fill-opacity: 0.8;
 }
 
-.booked-place-marker {
-	fill: orange;
+.booked .place-marker {
+	fill: #ffc400;
+	stroke: #ffc400;
+	stroke-width: 1;
 }
 
-.available-place-marker {
-	fill: aquamarine;
+.available .place-marker {
+	fill: #57b172;
+	stroke: #57b172;
+	stroke-width: 1;
 }
 
-.selected-desk,
-.selected-place-marker {
-	fill: rgb(80, 80, 241);
+.booked .desk-detail {
+	fill: #ffe388;
+	text-anchor: middle;
+}
+
+.available .desk-detail {
+	fill: #c8fdd8;
+	text-anchor: middle;
+}
+.available:hover .place-marker,
+.available:hover .desk-rectangle {
+	fill: #378cfb;
+}
+
+.available:hover .desk-rectangle {
+	transform: scale(1.03);
+}
+
+.available:hover .desk-detail {
+	fill: black;
+	font-weight: 600;
+}
+
+.available:hover * {
+	cursor: pointer;
+}
+
+.selected:hover * {
+	cursor: pointer;
+}
+
+.selected .desk-rectangle,
+.selected .place-marker {
+	fill: #6a6ce7;
 }
 
 .desk-detail {
-	font-family: "Trebuchet MS", sans-serif;
-	fill: white;
+	font-family: "Quicksand", sans-serif;
+	font-weight: 400;
+	fill: #ffc400;
 	text-anchor: middle;
+}
+
+.island {
+	fill: #faf5c1d0;
+	fill-opacity: 0.7;
+	stroke-linecap: butt;
 }
