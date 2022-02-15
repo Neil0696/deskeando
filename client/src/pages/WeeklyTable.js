@@ -54,7 +54,7 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	const availableDesks = maxDesksForDay - countBookingsByDay;
 
 	if (availableDesks === 0) {
-		return "No desks available";
+		return "No desks";
 	} else {
 		return availableDesks + "/" + maxDesksForDay + "desks";
 	}
@@ -129,7 +129,7 @@ const WeeklyTable = ({
 						{week.map((date) => (
 							<th key={date}>
 								<div className="header-date">{formatBookingDate(date)}</div>
-								<div className="grid">
+								<div className="table-header">
 									<span className="available-desk">
 										{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
 										<br/>available

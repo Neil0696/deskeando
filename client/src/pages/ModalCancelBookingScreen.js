@@ -28,8 +28,14 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 			onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
 			open={open}
-			size="tiny"
-			trigger={<Icon link name="trash alternate outline" color="orange" />}
+			trigger={
+				<Icon
+					link
+					name="trash alternate outline"
+					color="orange"
+					style={{ marginLeft: "1rem" }}
+				/>
+			}
 		>
 			<Header>Delete Your Booking</Header>
 			<Modal.Content>

@@ -45,7 +45,7 @@ const FloorPlan = ({ desks, bookings, deskId, setDeskId }) => {
 	return (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
-			width="390"
+			width="300"
 			height="330"
 			viewBox="0 0 652 660"
 		>

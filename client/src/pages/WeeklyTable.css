@@ -90,35 +90,32 @@ td.visible-on-hover {
 }
 
 .header-date {
+	display: flex;
+	justify-content: center;
 	background-color: #eb7623;
 	padding: 1px;
-	font-weight: bold;
+	font-size: 1.4rem;
+	font-weight: 700;
+	height: auto;
 }
 
-.grid {
+.table-header {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
+	justify-content: space-evenly;
 }
 
 .available-desk {
-	padding: 5px;
+	font-size: 1rem;
 	margin:auto;
-	/* flex: 50%;
-	justify-content: center;
-	align-items: center;  */
 } 
 
 .header-add-icon {
-	padding: 5px;
-	/* flex: 80%; */
-	/* justify-content: center;
-	align-items: flex-end; */
- }
+	margin: auto;
+}
 
-@media (max-width: 880px) {
+@media (max-width: 820px) {
 	.table-container #table {
-		margin: 15px 0;
+		margin: 0 0;
 		width: 100%;
 		font-size: 0.8em;
 		padding: 1px;
@@ -139,9 +136,31 @@ td.visible-on-hover {
 	th {
 		padding: 3px;
 	}
+	.arrow {
+		justify-content: center;
+	}
+	td.desk-column,
+	td,
+	th {
+		min-width: min-content;
+	}
+	.header-date {
+	display: flex;
+	justify-content: center;
+	background-color: #eb7623;
+	margin: auto;
+	padding: 0;
+	font-size: 0.8rem;
+	font-weight: 700;
+	height: auto;
+}
+.available-desk {
+	font-size: 0.6rem;
+	margin:auto;
+} 
 }
 
-@media (min-height: 600px) {
+@media (min-height: 665px) {
 	.table-container #table {
 		margin-top: 30px;
 	}
@@ -150,7 +169,7 @@ td.visible-on-hover {
 	}
 }
 
-@media (min-height: 600px) and (max-width: 880px) {
+@media (min-height: 665px) and (max-width: 820px) {
 	.arrow {
 		margin-top: 0;
 	}
