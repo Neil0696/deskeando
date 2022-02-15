@@ -122,7 +122,7 @@ td.visible-on-hover {
 	}
 }
 
-@media (min-height: 600px), (max-width: 880px) {
+@media (min-height: 600px) and (max-width: 880px) {
 	.arrow {
 		margin-top: 0;
 	}
