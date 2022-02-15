@@ -54,13 +54,14 @@ th {
 
 td.visible-on-hover,
 th {
+	padding: 4px;
 	font-weight: 500;
 	height: 50px;
 }
 
 td.visible-on-hover {
 	border-radius: 4px 0 0 3px;
-	border-left: 8px solid #ff9054;
+	border-left: 8px solid #ffa270;
 }
 
 .arrow {
