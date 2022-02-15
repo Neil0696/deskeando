@@ -31,23 +31,31 @@ body {
 		margin: auto;
 	}
 	.wrapper-inner1 {
+		height: auto;
+		width: auto;
 		transform: scale(50%, 50%);
-		height: px;
-		width: px;
 		margin-top: auto;
 		display: flex;
 		align-self: center;
-		justify-content: space-between;
 	}
 }
 
 @media (min-height: 600px) {
+	.wrapper {
+		grid: auto / 150px auto;
+	}
 	.wrapper-inner1 {
-		margin-top: 26vh;
+		margin-top: 29vh;
 	}
 }
 
-.inner {
-	display: flex;
-	margin-top: 40px;
+@media (min-height: 600px), (max-width: 880px) {
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		margin: auto;
+	}
+	.wrapper-inner1 {
+		margin-top: 0;
+	}
 }

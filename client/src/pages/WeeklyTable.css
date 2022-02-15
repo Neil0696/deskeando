@@ -27,27 +27,21 @@ th {
 .table-container #table {
 	margin-right: 0;
 	width: 100%;
-	margin-top: 10px;
+	margin-top: 20px;
 	background-color: #ddd4d2;
 	color: black;
 	font-size: 1.2rem;
 }
 
 .table-container {
-	padding: 10px;
+	padding: 0 10px;
 }
 
 .inner {
-	display: inline-block;
-	border-radius: 40px;
 	padding: 8px 16px;
 	font-size: 1.6em;
-	margin-top: 40px;
-}
-
-.inner {
-	display: inline-block;
-	margin-top: 40px;
+	border-radius: 40px;
+	margin-top: 1vh;
 }
 
 .hide {
@@ -56,6 +50,23 @@ th {
 
 .visible-on-hover:hover .hide {
 	display: contents;
+}
+
+td.visible-on-hover,
+th {
+	font-weight: 500;
+	height: 50px;
+}
+
+td.visible-on-hover {
+	border-radius: 4px 0 0 3px;
+	border-left: 8px solid #ff9054;
+}
+
+.arrow {
+	margin-top: 20px;
+	display: flex;
+	align-items: center;
 }
 
 .previous {
@@ -76,26 +87,10 @@ th {
 	padding: 8px 16px;
 	font-size: 1.6em;
 }
-.arrow {
-	display: flex;
-	align-items: center;
-	margin-bottom: 30px;
-}
-
-td.visible-on-hover,
-th {
-	font-weight: 500;
-	height: 50px;
-}
-
-td.visible-on-hover {
-	border-radius: 4px 0 0 3px;
-	border-left: 8px solid #ff9054;
-}
 
 @media (max-width: 880px) {
 	.table-container #table {
-		margin: auto;
+		margin: 15px 0;
 		width: 100%;
 		font-size: 0.8em;
 		padding: 1px;
@@ -120,9 +115,15 @@ td.visible-on-hover {
 
 @media (min-height: 600px) {
 	.table-container #table {
-		margin-top: 20px;
+		margin-top: 30px;
 	}
-	.inner {
+	.arrow {
 		margin-top: 18vh;
+	}
+}
+
+@media (min-height: 600px), (max-width: 880px) {
+	.arrow {
+		margin-top: 0;
 	}
 }

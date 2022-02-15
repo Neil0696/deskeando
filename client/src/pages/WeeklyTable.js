@@ -110,19 +110,19 @@ const WeeklyTable = ({
 	}
 
 	return (
-		<div>
+		<div className="table-container">
 			<div className="arrow">
-				<Button className={"arrows"} icon onClick={setPreviousMonday}>
+				<Button className="arrows" icon onClick={setPreviousMonday}>
 					<Icon name="angle left" size="big" />
 				</Button>
-				<button className={"inner"} onClick={setThisMonday}>
+				<button className="inner" onClick={setThisMonday}>
 					This week
 				</button>
-				<Button className={"arrows"} icon onClick={setPreviousMonday}>
+				<Button className="arrows" icon onClick={setNextMonday}>
 					<Icon name="angle right" size="big" />
 				</Button>
 			</div>
-			<table id="table" className="table-container">
+			<table id="table" className="table">
 				<thead>
 					<tr>
 						<th></th>
