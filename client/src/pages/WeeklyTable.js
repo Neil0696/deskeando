@@ -119,7 +119,7 @@ const WeeklyTable = ({
 				<button className={"inner"} onClick={setThisMonday}>
 					This week
 				</button>
-				<Button className={"arrows"} icon onClick={setPreviousMonday}>
+				<Button className={"arrows"} icon onClick={setNextMonday}>
 					<Icon name="angle right" size="big" />
 				</Button>
 			</div>
