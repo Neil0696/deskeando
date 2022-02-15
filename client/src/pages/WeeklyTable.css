@@ -89,6 +89,33 @@ td.visible-on-hover {
 	font-size: 1.6em;
 }
 
+.header-date {
+	background-color: #eb7623;
+	padding: 1px;
+	font-weight: bold;
+}
+
+.grid {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.available-desk {
+	padding: 5px;
+	margin:auto;
+	/* flex: 50%;
+	justify-content: center;
+	align-items: center;  */
+} 
+
+.header-add-icon {
+	padding: 5px;
+	/* flex: 80%; */
+	/* justify-content: center;
+	align-items: flex-end; */
+ }
+
 @media (max-width: 880px) {
 	.table-container #table {
 		margin: 15px 0;

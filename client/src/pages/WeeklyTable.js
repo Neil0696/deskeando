@@ -56,7 +56,7 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	if (availableDesks === 0) {
 		return "No desks available";
 	} else {
-		return availableDesks + "/" + maxDesksForDay + " desks available";
+		return availableDesks + "/" + maxDesksForDay + "desks";
 	}
 };
 
@@ -130,10 +130,11 @@ const WeeklyTable = ({
 							<th key={date}>
 								<div className="header-date">{formatBookingDate(date)}</div>
 								<div className="grid">
-									<grid className="date-grid">
+									<span className="available-desk">
 										{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
-									</grid>
-									<grid className="header-add-icon">
+										<br/>available
+									</span>
+									<span className="header-add-icon">
 										<ModalBookingScreen
 											bookingDate={date}
 											refreshBooking={refreshBooking}
@@ -141,7 +142,7 @@ const WeeklyTable = ({
 											users={users}
 											bookingsForDate={bookingsByDayWithDesk[date]}
 										/>
-									</grid>
+									</span>
 								</div>
 							</th>
 						))}
