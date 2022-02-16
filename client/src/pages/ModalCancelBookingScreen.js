@@ -28,9 +28,13 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 			onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
 			open={open}
-			size="tiny"
 			trigger={
-				<Icon link name="trash alternate outline" size="large" color="yellow" />
+				<Icon
+					link
+					name="trash alternate outline"
+					color="orange"
+					style={{ marginLeft: "1rem" }}
+				/>
 			}
 		>
 			<Header>Delete Your Booking</Header>
@@ -39,8 +43,8 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 					<Segment>
 						<p>Dear {booking.name},</p>
 						<p>
-							Are you sure you want delete your booking for{" "}
-							"{formatBookingDate(booking.date)}"?
+							Are you sure you want delete your booking for "
+							{formatBookingDate(booking.date)}"?
 						</p>
 					</Segment>
 				</Modal.Description>
