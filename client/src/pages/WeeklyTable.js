@@ -56,7 +56,7 @@ const getAvailableDesksForDay = (bookings, date, maxDesksForDay) => {
 	if (availableDesks === 0) {
 		return "No desks";
 	} else {
-		return availableDesks + "/" + maxDesksForDay + "desks";
+		return availableDesks + "/" + maxDesksForDay + " desks";
 	}
 };
 
@@ -132,7 +132,8 @@ const WeeklyTable = ({
 								<div className="table-header">
 									<span className="available-desk">
 										{getAvailableDesksForDay(bookings, date, maxDesksForDay)}
-										<br/>available
+										<br />
+										available
 									</span>
 									<span className="header-add-icon">
 										<ModalBookingScreen
@@ -153,7 +154,10 @@ const WeeklyTable = ({
 						<tr key={i}>
 							<td></td>
 							{row.map((booking, index) => (
-								<td key={index} className="visible-on-hover">
+								<td
+									key={index}
+									className={`visible-on-hover ${booking ? "booked-bar" : ""}`}
+								>
 									{booking?.name}
 									{booking?.name && (
 										<span className="hide">
@@ -171,7 +175,10 @@ const WeeklyTable = ({
 						<tr key={desk.name}>
 							<td className="desk-column">{desk.name}</td>
 							{bookingsByDesk[desk.name].map((booking, index) => (
-								<td key={index} className="visible-on-hover">
+								<td
+									key={index}
+									className={`visible-on-hover ${booking ? "booked-bar" : ""}`}
+								>
 									{booking?.name}
 									{booking?.name && (
 										<span className="hide">

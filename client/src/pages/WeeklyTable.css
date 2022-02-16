@@ -52,6 +52,13 @@ th {
 	display: contents;
 }
 
+.visible-on-hover:hover {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
 td.visible-on-hover,
 th {
 	padding: 4px;
@@ -59,7 +66,7 @@ th {
 	height: 50px;
 }
 
-td.visible-on-hover {
+.booked-bar {
 	border-radius: 4px 0 0 3px;
 	border-left: 8px solid #ffa270;
 }
