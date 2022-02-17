@@ -97,7 +97,6 @@ function ModalBookingScreen({
 			onOpen={() => setOpen(true)}
 			open={open}
 			trigger={
-				// <Icon link name="add" size="small" circular inverted color="teal" />
 				<Icon.Group>
 					<Icon name="map marker alternate" inverted color="orange" />
 					<Icon corner name="add" color="orange" />

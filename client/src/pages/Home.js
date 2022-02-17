@@ -39,10 +39,10 @@ export function Home() {
 	return (
 		<main role="main">
 			<div id="wrapper">
-				<grid className="wrapper-inner1">
+				<div className="wrapper-inner1">
 					<img src={logo} alt="Deskeando Logo" />
-				</grid>
-				<grid className="wrapper-inner2">
+				</div>
+				<div className="wrapper-inner2">
 					<WeeklyTable
 						bookings={bookings}
 						desks={desks}
@@ -50,7 +50,7 @@ export function Home() {
 						maxDesksForDay={MAX_DESKS_FOR_DAY}
 						users={users}
 					/>
-				</grid>
+				</div>
 			</div>
 		</main>
 	);
