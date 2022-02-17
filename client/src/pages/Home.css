@@ -23,21 +23,32 @@ body {
 	max-width: 260px;
 }
 
+.logo-small {
+	display: none;
+}
+
 @media (max-width: 820px) {
-	#wrapper {
-		/* scroll-behavior: smooth; */
+	#wrapper{
+		scroll-behavior: smooth;
 		display: flex;
 		flex-direction: column;
 		margin: auto;
 		justify-content: center;
+		align-content: flex-start;
 	}
 	.wrapper-inner1 {
 		height: auto;
 		width: auto;
-		transform: scale(50%, 50%);
+		/* transform: scale(50%, 50%); */
 		margin-top: auto;
 		display: flex;
 		align-self: center;
+	}
+	.logo {
+		display: none;
+	}
+	.logo-small{
+		display: flex;
 	}
 }
 
