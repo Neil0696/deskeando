@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import WeeklyTable from "./WeeklyTable";
 import "./Home.css";
 import logo from "../assets/Deskeando-Logo.png";
+import logoSmall from "../assets/Deskeando-Logo-half.png";
 
 const MAX_DESKS_FOR_DAY = 5;
 
@@ -39,10 +40,11 @@ export function Home() {
 	return (
 		<main role="main">
 			<div id="wrapper">
-				<grid className="wrapper-inner1">
-					<img src={logo} alt="Deskeando Logo" />
-				</grid>
-				<grid className="wrapper-inner2">
+				<div className="wrapper-inner1">
+					<img className="logo" src={logo} alt="Deskeando Logo" />
+					<img className="logo-small" src={logoSmall} alt="Deskeando Logo" />
+				</div>
+				<div className="wrapper-inner2">
 					<WeeklyTable
 						bookings={bookings}
 						desks={desks}
@@ -50,7 +52,7 @@ export function Home() {
 						maxDesksForDay={MAX_DESKS_FOR_DAY}
 						users={users}
 					/>
-				</grid>
+				</div>
 			</div>
 		</main>
 	);

@@ -97,11 +97,10 @@ function ModalBookingScreen({
 			onOpen={() => setOpen(true)}
 			open={open}
 			trigger={
-				// <Icon link name="add" size="small" circular inverted color="teal" />
 				<Icon.Group>
-    			<Icon name='map marker alternate' inverted color='orange'/>
-    			<Icon corner name='add' color='orange'/>
-  				</Icon.Group>
+					<Icon name="map marker alternate" inverted color="orange" />
+					<Icon corner name="add" color="orange" />
+				</Icon.Group>
 			}
 		>
 			<Modal.Content>
@@ -135,12 +134,8 @@ function ModalBookingScreen({
 										/>
 									</Form.Field>
 									<Divider inverted />
-									<Form.Field inline>
-										<Popup
-											content={formatBookingDate(bookingDate)}
-											trigger={<Icon name="calendar alternate outline" />}
-										/>
-										<Input
+									<Form.Field>
+										<Form.Input
 											error={
 												dateErrorMessage && {
 													content: dateErrorMessage,
