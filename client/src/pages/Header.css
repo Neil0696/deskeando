@@ -1,0 +1,12 @@
+.about {
+    padding:10px;
+    padding-bottom: 20px;
+    text-align: right;
+    /* background-color: rgb(182, 106, 35); */
+    border-radius: 5px;
+    background-image: linear-gradient(#eb7623, #a7a6a5);
+}
+
+.about-link {
+    color: black;
+}
