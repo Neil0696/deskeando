@@ -15,21 +15,21 @@ td.desk-column {
 	font-weight: 700;
 }
 
-td,
-th {
+td {
 	padding: 8px;
 }
 
 th {
-	font-weight: 700;
+	font-weight: 900;
+	padding: 0px;
 }
 
 .table-container #table {
 	margin-right: 0;
 	width: 100%;
 	margin-top: 20px;
-	background-color: #f8f3f2;
-	color: #737872;
+	background-color: #ddd4d2;
+	color: black;
 	font-size: 1.2rem;
 }
 
@@ -59,8 +59,7 @@ th {
 	align-items: center;
 }
 
-td.visible-on-hover,
-th {
+td.visible-on-hover {
 	padding: 4px;
 	font-weight: 500;
 	height: 50px;
@@ -100,7 +99,7 @@ th {
 	display: flex;
 	justify-content: center;
 	background-color: #eb7623;
-	padding: 1px;
+	padding: 8px;
 	font-size: 1.4rem;
 	font-weight: 700;
 	height: auto;
@@ -108,13 +107,14 @@ th {
 
 .table-header {
 	display: flex;
+	padding: 8px;
 	justify-content: space-evenly;
 }
 
 .available-desk {
 	font-size: 1rem;
-	margin:auto;
-} 
+	margin: auto;
+}
 
 .header-add-icon {
 	margin: auto;
@@ -152,19 +152,19 @@ th {
 		min-width: min-content;
 	}
 	.header-date {
-	display: flex;
-	justify-content: center;
-	background-color: #eb7623;
-	margin: auto;
-	padding: 0;
-	font-size: 0.8rem;
-	font-weight: 700;
-	height: auto;
-}
-.available-desk {
-	font-size: 0.6rem;
-	margin:auto;
-} 
+		display: flex;
+		justify-content: center;
+		background-color: #eb7623;
+		margin: auto;
+		padding: 0;
+		font-size: 0.8rem;
+		font-weight: 700;
+		height: auto;
+	}
+	.available-desk {
+		font-size: 0.6rem;
+		margin: auto;
+	}
 }
 
 @media (min-height: 665px) {
