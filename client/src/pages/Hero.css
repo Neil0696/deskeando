@@ -1,0 +1,10 @@
+.container {
+	/* display: flex; */
+	/* color: #737872; */
+	background-image: url("../assets/Deskeando-Hero2.jpg");
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	/* width: auto; */
+	height: 100vh;
+}
