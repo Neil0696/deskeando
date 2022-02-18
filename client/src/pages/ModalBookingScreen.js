@@ -196,7 +196,7 @@ function ModalBookingScreen({
 			<Modal.Actions>
 				<Button.Group>
 					<Button
-						color="black"
+						color="grey"
 						onClick={() => {
 							setDateErrorMessage(null);
 							setBookingErrorMessage(null);
@@ -216,7 +216,7 @@ function ModalBookingScreen({
 						labelPosition="right"
 						icon="checkmark"
 						onClick={handleSubmit}
-						positive
+						color="orange"
 					/>
 				</Button.Group>
 			</Modal.Actions>
