@@ -44,7 +44,7 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 			</Modal.Content>
 			<Modal.Actions>
 				<Button.Group>
-					<Button color="black" onClick={() => setOpen(false)}>
+					<Button color="grey" onClick={() => setOpen(false)}>
 						Cancel
 					</Button>
 					<Button.Or />
@@ -54,7 +54,7 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 						labelPosition="right"
 						icon="checkmark"
 						onClick={handleSubmit}
-						positive
+						color="orange"
 					/>
 				</Button.Group>
 			</Modal.Actions>
