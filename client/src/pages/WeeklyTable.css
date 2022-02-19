@@ -20,7 +20,7 @@ td {
 }
 
 th {
-	font-weight: 900;
+	font-weight: 700;
 	padding: 0px;
 }
 
@@ -132,12 +132,10 @@ td.visible-on-hover {
 		text-align: center;
 		width: 30px;
 	}
-	td.visible-on-hover,
-	th {
-		font-size: 1.8rem;
+	td.visible-on-hover
+	{
 		min-width: 50px;
-		height: 26px;
-		font-size: 0.9rem;
+		font-size: 0.99rem;
 	}
 	td,
 	th {
