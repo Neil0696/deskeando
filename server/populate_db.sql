@@ -161,6 +161,23 @@ INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (7,6,'2022-03-2
 INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (7,6,'2022-03-24');
 
 -- April with desk
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (4,1,'2022-04-01');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-02');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-03');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-04');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (6,4,'2022-04-01');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (6,5,'2022-04-02');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (7,6,'2022-04-03');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (7,6,'2022-04-04');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (4,1,'2022-04-07');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-08');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-09');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-10');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (6,4,'2022-04-11');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (6,5,'2022-04-07');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (7,6,'2022-04-08');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (7,6,'2022-04-09');
+INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (3,4,'2022-04-10');
 INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (4,1,'2022-04-20');
 INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-18');
 INSERT INTO booking (desk_user_id, desk_id, booking_date) VALUES (5,3,'2022-04-20');
