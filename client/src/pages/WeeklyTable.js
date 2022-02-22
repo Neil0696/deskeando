@@ -71,12 +71,10 @@ const WeeklyTable = ({
 	const [currentMonday, setCurrentMonday] = useState(startOfTheWeekDate);
 
 	let week = [];
-	const year = currentMonday.getFullYear();
-	const month = currentMonday.getMonth();
-	let date = currentMonday.getDate();
-
+	let currentMoment = moment(currentMonday);
 	for (let i = 0; i < 5; i++) {
-		week.push(new Date(year, month, date + i).toISOString());
+		week.push(currentMoment.format("yyyy-MM-DD") + "T00:00:00.000Z");
+		currentMoment.add(1, "day");
 	}
 
 	const bookingsByRow = getBookingsByRow(bookings, week);
