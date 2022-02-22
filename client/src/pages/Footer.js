@@ -3,11 +3,12 @@ import "./Footer.css";
 import { Link } from "react-router-dom";
 
 const Footer = () => (
-	<section className="">
-
-		<Link className="about-link" to="/about/this/site">
-			About
-		</Link>
+	<section id="footer">
+		<div className="content">
+			<Link className="about-link" to="/about/this/site">
+				About
+			</Link>
+		</div>
 	</section>
 );
 

@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => (
-	<section>
-		<div className="about">
-			<Link className="about-link" to="/about/this/site">About</Link>
+	<section className="header">
+		<div className="menu">
+			<Link className="about" to="/about/this/site">
+				About
+			</Link>
 		</div>
 	</section>
 );
