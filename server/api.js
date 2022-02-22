@@ -55,7 +55,7 @@ router.get("/bookings", async (req, res) => {
 				name: row.username,
 				desk_id: row.desk_id,
 				desk: row.desk_name,
-				date: row.booking_date,
+				date: moment(row.booking_date).format("yyyy-MM-DD") + "T00:00:00.000Z",
 			};
 		});
 		res.json(bookings);
