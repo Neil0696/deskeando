@@ -16,7 +16,8 @@ module.exports = {
 			},
 			{
 				test: /\.(png|svg|jpe?g|gif)$/,
-				loader: "file-loader",
+				type: "asset/resource",
+				// loader: "file-loader",
 			},
 			{
 				test: /\.css$/,
@@ -53,9 +54,9 @@ module.exports = {
 		}),
 	],
 	resolve: {
-    fallback: {
-      crypto: false, // do not include a polyfill for abc
-      path: false ,
-    },
-  },
+		fallback: {
+			crypto: false, // do not include a polyfill for abc
+			path: false,
+		},
+	},
 };
