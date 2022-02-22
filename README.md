@@ -1,3 +1,26 @@
+# Description of Deskeando
+
+Deskeando is a hybrid word for booking a desk which we made up from mixing two languages together, Spanish and English. It is a desk booking app that allows for a safe hybrid working environment.
+
+The main features of the app are mentioned below:
+
+- Easy way to book a desk to work from the office.
+- Users can choose where to sit.
+- Ability to add and delete a booking.
+- Default assumption: people don't care where they sit, or want to choose when they arrive
+- Target company is medium sized with 10-100 desk.
+- Anyone can add and remove bookings for anyone else as it's designed for people who work at the same company and trust each other.
+
+# Context of Deskeando
+
+Deskeando is the name of our final project for CodeYourFutre which we developed in 4 weeks. The participants are mentioned below with their linkedIn profiles:
+
+1. Benjamin Mhrdd - www.linkedin.com/in/benjamin-mehrdad-306582a2
+2. Rebeca Santos - www.linkedin.com/in/rebeca-lpz-santos/
+3. Oneil Malik - www.linkedin.com/in/o-neil-malik-a82271123
+4. Colette Sweeney - www.linkedin.com/in/colette-sweeney-2504b124/
+5. Sokratis Kladouchos - www.linkedin.com/in/sokratis-kladouchos-02635b208
+
 # Starter Kit
 
 [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
