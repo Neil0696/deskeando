@@ -1,0 +1,20 @@
+#footer {
+    position:fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.content {
+	display: flex;
+	justify-content: space-between;
+	padding-top: 30px;
+	margin-bottom: auto;
+    background-image: linear-gradient(to top, #eb7623, #a7a6a5);
+}
+
+.about-link {
+    color: black;
+    padding: 10px;
+    margin-bottom: 8px;
+    
+}
