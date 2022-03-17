@@ -8,5 +8,24 @@
 	"rules": {
 		"indent": ["error", true],
 		"operator-linebreak": "off"
-	}
+	},
+	"overrides": [
+		{
+			"files": ["setupTests.js", "**/*.test.js"],
+			"extends": ["plugin:jest/recommended"],
+			"rules": {
+				"jest/expect-expect": [
+					"error",
+					{
+						"assertFunctionNames": [
+							"cy.**.should",
+							"cy.checkA11y",
+							"expect",
+							"request.**.expect"
+						]
+					}
+				]
+			}
+		}
+	]
 }
