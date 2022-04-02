@@ -32,10 +32,9 @@ describe("ModalCancelBookingScreen component", () => {
 		render(
 			<ModalCancelBookingScreen
 				booking={{ name: "Maha", date: "2022-01-17T00:00:00.000Z", id: 1 }}
-				refreshBooking={() => {}}
 			/>
 		);
-		const deleteButton = screen.getByLabelText("Delete booking");
+		const deleteButton = screen.getByLabelText("Delete booking icon");
 
 		userEvent.click(deleteButton);
 
@@ -56,7 +55,7 @@ describe("ModalCancelBookingScreen component", () => {
 				refreshBooking={mockRefresh}
 			/>
 		);
-		userEvent.click(screen.getByLabelText("Delete booking"));
+		userEvent.click(screen.getByLabelText("Delete booking icon"));
 
 		const confirmDeleteButton = screen.getByRole("button", {
 			name: "Delete Booking",

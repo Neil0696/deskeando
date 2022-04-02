@@ -5,6 +5,10 @@ import { formatBookingDate } from "../util";
 function ModalCancelBookingScreen({ booking, refreshBooking }) {
 	const [open, setOpen] = React.useState(false);
 
+	// const handleSubmit = () => {
+	// 	setOpen(false);
+	// };
+
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
@@ -14,18 +18,18 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 				"content-type": "application/json",
 			},
 		}).then((response) => {
-			if (response.status >= 200 && response.status <= 299) {
+			// if (response.status >= 200 && response.status <= 299) {
 				setOpen(false);
 				refreshBooking();
-			} else {
-				throw new Error("Unexpected error");
-			}
+			// } else {
+			// 	throw new Error("Unexpected error");
+			// }
 		});
 	};
 
 	return (
 		<Modal
-			onClose={() => setOpen(false)}
+			// onClose={() => setOpen(false)}
 			onOpen={() => setOpen(true)}
 			open={open}
 			trigger={
@@ -33,7 +37,7 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 					link
 					name="trash alternate outline"
 					color="orange"
-					aria-label="Delete booking"
+					aria-label="Delete booking icon"
 				/>
 			}
 		>
@@ -51,9 +55,9 @@ function ModalCancelBookingScreen({ booking, refreshBooking }) {
 			</Modal.Content>
 			<Modal.Actions>
 				<Button.Group>
-					<Button color="grey" onClick={() => setOpen(false)}>
+					{/* <Button color="grey" onClick={() => setOpen(false)}>
 						Cancel
-					</Button>
+					</Button> */}
 					<Button.Or />
 					<Button
 						content="Delete Booking"
